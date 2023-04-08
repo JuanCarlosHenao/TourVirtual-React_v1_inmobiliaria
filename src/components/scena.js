@@ -39,8 +39,8 @@ export default function Scene() {
     return (
         <div>
             <Pannellum
-                width={'100%'}
-                height={'100vh'}
+                width={'50%'}
+                height={'50vh'}
                 title={scene.title}
                 image={scene.image}
                 pitch={-16.28}
