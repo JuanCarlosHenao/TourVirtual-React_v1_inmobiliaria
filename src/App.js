@@ -5,19 +5,30 @@ import './styles/index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import dataScene from './helpers/dataScene';
 import EscenaSola from './components/escenasola'
-
+import React, { useState } from 'react';
 
 function App() {
+  const [sceneSelected, setSceneSelected] = useState(false);
+  const [numberScene, setNumberScene] = useState(0);
+  const handleClick = (id) => {
+    console.log('oe---');
+    console.log(id);
+    setSceneSelected(true);
+    setNumberScene(id);
+  };
 
   return (
     <div className="App">
       <div className='row'>
         <CustomMenu></CustomMenu>
-        <Properties></Properties>
-        <EscenaSola escenaCompleta={dataScene[2]}></EscenaSola>
-      </div>
-      <div className='container'>
-        <Scene escenas={dataScene}></Scene>
+        { sceneSelected  && (
+          <div>
+          <EscenaSola escenaCompleta={dataScene[numberScene]}></EscenaSola>
+          </div>
+        )}
+        { !sceneSelected  && (
+          <Properties handleClick={handleClick}></Properties>
+        )}
       </div>
     </div>
   );

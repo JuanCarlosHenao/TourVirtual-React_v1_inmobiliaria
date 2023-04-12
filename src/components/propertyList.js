@@ -40,10 +40,12 @@ const Properties = (props) => {
                 return (
                     <div className='col-4'>
                     <Property
+                        id={property.id}
                         description={property.description}
                         name={property.name}
                         image={property.image}
                         price={property.price}
+                        handleClick={props.handleClick}
                     >   
                     </Property>
                     </div>
