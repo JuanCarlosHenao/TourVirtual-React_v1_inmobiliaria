@@ -1,9 +1,9 @@
-import Properties from './components/propertyList';
-import CustomMenu from './components/menu';
+import Properties from './components/property/propertyList';
+import CustomMenu from './components/menu/menu';
 import Scene from './components/scena';
 import './styles/index.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import dataScene from './helpers/dataScene';
+import dataScene from './components/dataScene';
 import EscenaSola from './components/escenasola'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -12,6 +12,7 @@ function App() {
   const [sceneSelected, setSceneSelected] = useState(false);
   const [numberScene, setNumberScene] = useState(0);
   const [properties, setProperties] = useState([]);
+  
 
   const handleClick = (id) => {
 
@@ -21,33 +22,33 @@ function App() {
     setNumberScene(id);
   };
 
-  // const getProperties = async ()=>{
-  //   const url = 'http://127.0.0.1:8080/inmobiliaria360/inmuebles'
-  //   // const url = 'https://gorest.co.in/public/v2/users'
-  //   // const config = {
-  //   //   headers: {
-  //   //     'Accept-Encoding': 'gzip, deflate, br',
-  //   //     'Host':'<calculated when request is sent>'
-  //   //   }
-  //   // };
-  //   let properties = []
-  //   try {
-  //     properties = await axios.get(url)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  //   console.log("Prueba 1")
-  //   console.log(properties.data)
+  const resetPage = () => {
+    setSceneSelected(false);
+    setNumberScene(0);
+  };
+
+  const getProperties = async ()=>{
+    const url = 'http://127.0.0.1:8080/inmobiliaria360/inmuebles'
+    let properties = []
+    try {
+      const {data} = await axios.get(url)
+      properties= data;
+    } catch (error) {
+      console.log(error)
+    }
+    console.log("Prueba 1")
+    console.log(properties.data)
+    console.log(properties)
   
-  //   return { properties};
-  // }
+    setProperties(properties);
+  }
 
 
 
-  // useEffect(async () => {
-  //   setProperties(await getProperties());
-  //   postInmueble();
-  // }, [properties]);
+  useEffect( () => {
+    getProperties();
+    // postInmueble();
+  }, []);
 
 
 
@@ -120,22 +121,22 @@ function App() {
 /// -------------------------------------------------------------------------
   /// Ejempplo de consumo 
 
-  const url = "http://127.0.0.1:8080/inmobiliaria360/inmuebles";
+  // const url = "http://127.0.0.1:8080/inmobiliaria360/inmuebles";
 
 
-  const getInmuebles = () => {
-    fetch(url)
-      .then(response => response.json())
-      // .then(data => console.log(data))
-      .then(data => setProperties(data))
-      .catch(error => console.log(error))
-  };
+  // const getInmuebles = () => {
+  //   fetch(url)
+  //     .then(response => response.json())
+  //     // .then(data => console.log(data))
+  //     .then(data => setProperties(data))
+  //     .catch(error => console.log(error))
+  // };
 
 
-  useEffect( () => {
-    getInmuebles(url);
-    postInmueble();
-  }, []);
+  // useEffect( () => {
+  //   getInmuebles(url);
+  //   postInmueble();
+  // }, []);
 
 /// -------------------------------------------------------------------------
 
@@ -143,11 +144,11 @@ function App() {
   return (
     <div className="App">
       <div className='row'>
-        <CustomMenu></CustomMenu>
+        <CustomMenu isSceneSelect={sceneSelected} resetPage={resetPage} ></CustomMenu>
         { sceneSelected  && (
-          <div>
+
           <EscenaSola escenaCompleta={dataScene[numberScene]}></EscenaSola>
-          </div>
+
         )}
         { !sceneSelected  && (
           <Properties properties={properties} handleClick={handleClick}></Properties>

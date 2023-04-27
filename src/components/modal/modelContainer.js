@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import Model from "../hooks/loadModel";
-import '../styles/model.css';
+import Model from "../../hooks/loadModel";
+import '../../styles/model.css';
 
 export default function ModelContainer({nameModel}){
     const mountRef = useRef(null);

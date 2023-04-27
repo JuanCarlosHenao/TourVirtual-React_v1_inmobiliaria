@@ -5,7 +5,7 @@ const Scenes = [  // Arreglo de escenas
   {
     id: "insideOne",
     title: "interior 1",
-    image: insideOne,
+    image: "https://res.cloudinary.com/back-pragma/image/upload/v1681707044/tesis/Prueba1_m4xukw.jpg",
     pitch: -11,
     yaw: -3,
     hotSpot: {
@@ -40,7 +40,7 @@ const Scenes = [  // Arreglo de escenas
   {
     id: "insideTwo",
     title: "interior 2",
-    image: insideTwo,
+    image: "https://res.cloudinary.com/back-pragma/image/upload/v1681707044/tesis/Prueba1_m4xukw.jpg",
     pitch: 10,
     yaw: 180,
     hotSpot: {

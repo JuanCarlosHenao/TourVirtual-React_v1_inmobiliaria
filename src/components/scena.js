@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Pannellum } from 'pannellum-react';
-import Modal from '../components/modal';
-import dataScene from '../helpers/dataScene';
+import Modal from './modal/modal';
+import dataScene from './dataScene';
 import { UseModal } from '../hooks/useModal';
-import ModelContainer from './modelContainer';
+import ModelContainer from './modal/modelContainer';
 
 const Scene=({escenas=[]})=> {  // puede entrar como parámetro la escena a la que quiero ir y de acuerdo a esto ya desde el botón puedo elegir a cuál apuntar
     // const { isOpen, openModal, closeModal } = UseModal(false);
