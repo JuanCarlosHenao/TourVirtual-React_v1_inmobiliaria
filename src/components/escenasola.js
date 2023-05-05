@@ -113,22 +113,24 @@ const Escena = ({escenaCompleta}) => {
     };
 
     return (
-      <div class='col-9'>
-        <Pannellum
-          width="100%" // ancho
-          height="100vh" // alto
-          image={escena.image}
-          pitch={escena.pitch}
-          yaw={escena.yaw}
-          hfov={110}
-          title={escena.title}
-          autoLoad //Boolean	false	Load and dsplay the image automatically if true
-          hotspotDebug={true} //Boolean	false	For debug pupose (finding correct point for hotspot)
-        >
-          {Object.values(escena.hotSpot).map((element, i) =>
-            hotSpots(element, i)
-          )}
-        </Pannellum>
+      <div class="col-9">
+        {escena && (
+          <Pannellum
+            width="100%" // ancho
+            height="100vh" // alto
+            image={escena.image}
+            pitch={escena.pitch}
+            yaw={escena.yaw}
+            hfov={110}
+            title={escena.title}
+            autoLoad //Boolean	false	Load and dsplay the image automatically if true
+            hotspotDebug={true} //Boolean	false	For debug pupose (finding correct point for hotspot)
+          >
+            {/* {Object.values(escena.hotSpot).map((element, i) =>
+              hotSpots(element, i)
+            )} */}
+          </Pannellum>
+        )}
       </div>
     );
 };
