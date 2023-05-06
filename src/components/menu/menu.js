@@ -30,6 +30,9 @@ const CustomMenu = (props) => {
               <Link to='/postEscena'>Agregar escena</Link>
               
           </li>
+          <li className="menu-item">
+              <Link to='/example' state={"Hola como estás"} >Example </Link>
+          </li>
 
         </ul>
         {props.isSceneSelect && (

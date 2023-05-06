@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CustomMenu from "../components/menu/menu";
 import axios from "axios";
+import '../components/css/SaveInmueble.css';
 
 const SaveInmueble = () => {
     // const [nombre,setNombre]=useState("");
@@ -94,77 +95,90 @@ const SaveInmueble = () => {
       //   </div>
 
       // --------------------------------------------------------------------------------
-      <div>
+      <div className='row'>
         <CustomMenu />
-        <h1>Ingrese los datos del inmueble a guardar</h1>
-        <h1>Formulario</h1>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="name">Ingrese el nombre del inmueble </label>
-          {/* en value sería el label al cual hago referencia ,sería la variable del hook ,
-          e es la funcion que dispara el cambio de estado  */}
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-          ></input>
-          <label htmlFor="price">Ingrese el precio del inmueble</label>
-          <input
-            type="text"
-            id="price"
-            name="price"
-            value={form.price}
-            onChange={handleChange}
-          ></input>
-          <label htmlFor="description">
-            Ingrese la descripcion del inmueble{" "}
-          </label>
-          <input
-            type="text"
-            id="description"
-            name="description"
-            value={form.description}
-            onChange={handleChange}
-          ></input>
-          <label htmlFor="image">
-            Ingrese la url de la imagen principal del inmueble{" "}
-          </label>
-          <input
-            type="text"
-            id="image"
-            name="image"
-            value={form.image}
-            onChange={handleChange}
-          ></input>
-          {/* <p>Desea vender la casa ?</p>
-          <label htmlFor="venta">Venta</label>
-          <input
-            type="radio"
-            id="venta"
-            name="venta"
-            value="ventaInmueble"
-            onChange={handleChange}
-          ></input>
-          <p>Seleccione la escena que desea editar </p>
+        <div class='col-9'>
+          <div>
+            <h1>Ingrese los datos del inmueble a guardar</h1>
+            <h1>Formulario</h1>
+          </div>
+          <div className='row'>
 
-          <select name="escena" onChange={handleChange}>
-            <option value="sala">Sala</option>
-            <option value="comedor">Comedor</option>
-            <option value="cocina">Cocina</option>
-            <option value="baño">Baño</option>
-          </select>
-          <br></br>
-          <label htmlFor="terminos">Acepto terminos y condiciones </label>
-          <input
-            type="checkbox"
-            id="terminos"
-            name="terminos"
-            onChange={handleChecked}
-          ></input> */}
-          {/* <input type="submit"></input> */}
-          <button className="btn btn-primary">Submit</button>
-        </form>
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="name">Ingrese el nombre del inmueble </label>
+              {/* en value sería el label al cual hago referencia ,sería la variable del hook ,
+              e es la funcion que dispara el cambio de estado  */}
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+              ></input>
+              <br></br>
+              <label htmlFor="price">Ingrese el precio del inmueble</label>
+              <input
+                type="text"
+                id="price"
+                name="price"
+                value={form.price}
+                onChange={handleChange}
+              ></input>
+              <br></br>
+              <label htmlFor="description">
+                Ingrese la descripcion del inmueble{" "}
+              </label>
+              <input
+                type="text"
+                id="description"
+                name="description"
+                value={form.description}
+                onChange={handleChange}
+              ></input>
+              <br></br>
+              <label htmlFor="image">
+                Ingrese la url de la imagen principal del inmueble{" "}
+              </label>
+              <input
+                type="text"
+                id="image"
+                name="image"
+                value={form.image}
+                onChange={handleChange}
+              ></input>
+              {/* <p>Desea vender la casa ?</p>
+              <label htmlFor="venta">Venta</label>
+              <input
+                type="radio"
+                id="venta"
+                name="venta"
+                value="ventaInmueble"
+                onChange={handleChange}
+              ></input>
+              <p>Seleccione la escena que desea editar </p>
+
+              <select name="escena" onChange={handleChange}>
+                <option value="sala">Sala</option>
+                <option value="comedor">Comedor</option>
+                <option value="cocina">Cocina</option>
+                <option value="baño">Baño</option>
+              </select>
+              <br></br>
+              <label htmlFor="terminos">Acepto terminos y condiciones </label>
+              <input
+                type="checkbox"
+                id="terminos"
+                name="terminos"
+                onChange={handleChecked}
+              ></input> */}
+              {/* <input type="submit"></input> */}
+              <br></br>
+              <button className="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+
+
       </div>
     );
   }

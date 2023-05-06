@@ -3,6 +3,7 @@ import { Pannellum } from "pannellum-react";
 import image from '../images/PanoramaInterior.png'
 import image2 from '../images/PanoramaInterior2.png'
 import dataScene from './dataScene';
+import {escenas} from '../pages/ListarEscenas'
 
 
 
@@ -97,6 +98,7 @@ const Escena = ({escenaCompleta}) => {
       else if (element.cssClass === "moveScene")
         return (
           console.log("entro 2"),
+
           (
             <Pannellum.Hotspot
               key={i}
@@ -104,7 +106,7 @@ const Escena = ({escenaCompleta}) => {
               yaw={element.yaw}
               pitch={element.pitch}
               handleClick={() => {
-                setEscena(dataScene.find(({id})=>id===element.scene));
+                setEscena(dataScene.find(({id})=>id===element.nextScene));
               }}
               cssClass={element.cssClass}
             />
@@ -126,9 +128,9 @@ const Escena = ({escenaCompleta}) => {
             autoLoad //Boolean	false	Load and dsplay the image automatically if true
             hotspotDebug={true} //Boolean	false	For debug pupose (finding correct point for hotspot)
           >
-            {/* {Object.values(escena.hotSpot).map((element, i) =>
+            {Object.values(escena.hotSpotResponseDtoList).map((element, i) =>
               hotSpots(element, i)
-            )} */}
+            )}
           </Pannellum>
         )}
       </div>

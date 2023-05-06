@@ -27,7 +27,7 @@ const InmuebleAEditar = (props) =>{
         } catch (error) {
           console.log(error)
         }
-        console.log("Prueba 4")
+        console.log("Prueba Editar")
         // console.log(property.data)
         console.log(property)
       
