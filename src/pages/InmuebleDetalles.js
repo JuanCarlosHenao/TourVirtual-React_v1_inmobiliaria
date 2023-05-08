@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react'
 import {useLocation} from "react-router-dom";
 import CustomMenu from '../components/menu/menu';
+import EscenaSave from './EscenaSave';
+import ListarEscenas from './ListarEscenas';
 
 const InmuebleDetalles = (props) =>{
     const location = useLocation();
@@ -61,6 +63,8 @@ const InmuebleDetalles = (props) =>{
             <li>{property.image}</li>
             {/* <li>{property.escenaResponseDtoList[0].title}</li>
             <EscenaSola escenaCompleta={property.escenaResponseDtoList[0]}></EscenaSola> */}
+            <ListarEscenas></ListarEscenas>
+            <EscenaSave></EscenaSave>
           </div>
         </div>
       </div>

@@ -26,22 +26,42 @@ export default function ListarEscenas (){
 
     useEffect( () => {
         getEscenas();
-        // postInmueble();
     }, []);
 
     return (
-      <div>
-        <CustomMenu></CustomMenu>
-        <h1>Estas son las escenas de prueba 4 </h1>
-        <div>
-          <div>
-            {escenas.map((item) => (
-              <div>
+      // <div>
+      //   <CustomMenu></CustomMenu>
+      //   <h1>Estas son las escenas de prueba 4 </h1>
+      //   <div>
+      //     <div>
+            // {escenas.map((item) => (
+            //   <div>
 
-                {item.title}
-                <EscenaSola escenaCompleta={item}></EscenaSola>
-                {/* <EscenaSola escenaCompleta={dataScene[numberScene]}></EscenaSola> */}
-              </div>
+            //     {/* {item.title} */}
+            //     <EscenaSola escenaCompleta={item} escenas={escenas}></EscenaSola>
+            //     {/* <EscenaSola escenaCompleta={dataScene[numberScene]}></EscenaSola> */}
+            //   </div>
+            // ))}
+      //     </div>
+      //   </div>
+      // </div>
+      <div className="row">
+        <CustomMenu></CustomMenu>
+        <div class="col-9">
+          <div>
+            <h1>Estas son todas las escenas guardadas </h1>
+            <h1>Formulario</h1>
+          </div>
+          <div className="row">
+            <EscenaSola escenaCompleta={escenas[0]} ></EscenaSola>
+            {escenas.map((item) => (
+              console.log("Las escenas son "+escenas.length),
+                <div>
+
+                  {/* {item.title} */}
+                  <EscenaSola escenaCompleta={item} ></EscenaSola>
+                  {/* <EscenaSola escenaCompleta={dataScene[numberScene]}></EscenaSola> */}
+                </div>
             ))}
           </div>
         </div>

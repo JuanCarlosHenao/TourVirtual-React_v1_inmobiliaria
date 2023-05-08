@@ -18,8 +18,10 @@ import EscenaPrueba from './pages/EscenaPrueba';
 import EscenaPruebas from './pages/escenasPruebas';
 import ListarEscenas from './pages/ListarEscenas';
 import EditarInmueble from './pages/EditarInmueble';
-import InmuebleAEditar from './pages/InmuebleAEditar'
 import InmuebleDetalles from './pages/InmuebleDetalles'
+import EscenaSave from './pages/EscenaSave'
+import HotSpotSave from './pages/HotSpotSave'
+import InmuebleAEditar from './pages/InmuebleAEditar'
 
 
 
@@ -41,7 +43,11 @@ function App() {
               <Route path='/getEscenas' element={<ListarEscenas/>} ></Route>
               <Route path='/editInmueble' element={<EditarInmueble/>} ></Route>
               <Route path='/InmuebleDetalles' element={<InmuebleDetalles/>} ></Route>
-
+              <Route path='/escenaSave' element={<EscenaSave/>} ></Route>
+              <Route path='/hotSpotSave' element={<HotSpotSave/>} ></Route>
+              <Route path='/InmuebleAEditar' element={<InmuebleAEditar/>} ></Route>
+              
+              
 
         </Routes>
     </BrowserRouter>

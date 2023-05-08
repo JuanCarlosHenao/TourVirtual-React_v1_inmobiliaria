@@ -27,9 +27,14 @@ const CustomMenu = (props) => {
               
           </li>
           <li className="menu-item">
-              <Link to='/postEscena'>Agregar escena</Link>
+              <Link to='/escenaSave'>Agregar escena</Link>
               
           </li>
+          <br></br>
+            <li className="menu-item">
+                <Link to='/hotSpotSave'>Agregar Hotspot</Link>
+            </li>
+          <br></br>
           <li className="menu-item">
               <Link to='/example' state={"Hola como estás"} >Example </Link>
           </li>

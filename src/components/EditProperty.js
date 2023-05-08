@@ -12,10 +12,20 @@ const EditProperty = (props) => {
             <div class="description">
                 <h2>{props.name}</h2>
                 <p>{props.description}</p>
-                <button className = "buttonProperty" > <Link  to={`/InmuebleAEditar/${props.id}`}>Editar inmueble</Link></button>
+                <button className = "buttonProperty" > 
+                    <Link to='/InmuebleAEditar' state= {{
+                        id :props.id,
+                        name:props.name,
+                        price:props.price,
+                        description:props.description,
+                        image:props.image, 
+                    }}>Editar Inmueble</Link>
+                </button>
             </div>
         </div>
     );
 };
 
 export default EditProperty;
+
+
