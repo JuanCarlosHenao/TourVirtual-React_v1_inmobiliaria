@@ -6,6 +6,9 @@ import { BrowserRouter, Route, Router, RouterProvider, Routes, createBrowserRout
 import Home from './pages/home';
 import { Path } from 'three';
 import Scene from './components/scena';
+import {
+  RecoilRoot,
+} from 'recoil';
 
 import Example from './pages/example';
 
@@ -22,6 +25,8 @@ import InmuebleDetalles from './pages/InmuebleDetalles'
 import EscenaSave from './pages/EscenaSave'
 import HotSpotSave from './pages/HotSpotSave'
 import InmuebleAEditar from './pages/InmuebleAEditar'
+import EscenaAEditar from './pages/EscenaAEditar'
+import HotSpotAEditar from './pages/HotSpotAEditar'
 
 
 
@@ -30,27 +35,29 @@ function App() {
 
 
   return (
-    <BrowserRouter>
-        <Routes>
-              <Route index element={<Home />}></Route>
-              <Route path='/example' element={<Example/>} ></Route>
-              <Route path='/inmuebledescripcion' element={<Inmueble/>} ></Route>
-              <Route path='/crearEscena' element={<h1>Escena a crear</h1>} ></Route>
-              <Route path='/escenas' element={<Escenas/>} ></Route>
-              <Route path='/saveInmueble' element={<SaveInmueble/>} ></Route>
-              <Route path='/escenasPruebas' element={<EscenaPruebas/>} ></Route>
-              <Route path='/escenasPruebas/escenas/:escenaId' element={<EscenaPrueba/>} ></Route>
-              <Route path='/getEscenas' element={<ListarEscenas/>} ></Route>
-              <Route path='/editInmueble' element={<EditarInmueble/>} ></Route>
-              <Route path='/InmuebleDetalles' element={<InmuebleDetalles/>} ></Route>
-              <Route path='/escenaSave' element={<EscenaSave/>} ></Route>
-              <Route path='/hotSpotSave' element={<HotSpotSave/>} ></Route>
-              <Route path='/InmuebleAEditar' element={<InmuebleAEditar/>} ></Route>
-              
-              
-
-        </Routes>
-    </BrowserRouter>
+    <RecoilRoot>
+      <BrowserRouter>
+          <Routes>
+                <Route index element={<Home />}></Route>
+                <Route path='/example' element={<Example/>} ></Route>
+                <Route path='/inmuebledescripcion' element={<Inmueble/>} ></Route>
+                <Route path='/crearEscena' element={<h1>Escena a crear</h1>} ></Route>
+                <Route path='/escenas' element={<Escenas/>} ></Route>
+                <Route path='/saveInmueble' element={<SaveInmueble/>} ></Route>
+                <Route path='/escenasPruebas' element={<EscenaPruebas/>} ></Route>
+                <Route path='/escenasPruebas/escenas/:escenaId' element={<EscenaPrueba/>} ></Route>
+                <Route path='/getEscenas' element={<ListarEscenas/>} ></Route>
+                <Route path='/editInmueble' element={<EditarInmueble/>} ></Route>
+                <Route path='/InmuebleDetalles' element={<InmuebleDetalles/>} ></Route>
+                <Route path='/escenaSave' element={<EscenaSave/>} ></Route>
+                <Route path='/hotSpotSave' element={<HotSpotSave/>} ></Route>
+                <Route path='/InmuebleAEditar' element={<InmuebleAEditar/>} ></Route>
+                <Route path='/EscenaAEditar' element={<EscenaAEditar/>} ></Route>
+                <Route path='/HotSpotAEditar' element={<HotSpotAEditar/>} ></Route>
+                
+          </Routes>
+      </BrowserRouter>
+    </RecoilRoot>
   );
 }
 

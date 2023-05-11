@@ -84,57 +84,64 @@ import React, { useState, useEffect } from 'react'
 
 
 
-// const Escena = ({escenaCompleta},{escenas}) => {
-const Escena = ({escenaCompleta}) => {
+const  Escena = (props) => {
+
+// const Escena = ({escenaCompleta}) => {
+    // console.log("La lista de las escenas es "+props.estado)
 
 
     // const escenasList = [escenas]
     // console.log(escenasList)
 
-    const [escenaNueva, setEscenaNueva] = useState([]);
+    // const [escenaNueva, setEscenaNueva] = useState({});
 
 
-    const getEscena = async (idNuevaEscena)=>{
-      const url = `http://127.0.0.1:8080/inmobiliaria360/inmueble/escena/escenaSola/${idNuevaEscena}`
-      // let escenaNueva = []
-      try {
-        const {data} = await axios.get(url)
-        escenaNueva= data;
-      } catch (error) {
-        console.log(error)
-      }
-      console.log("Prueba 4")
-      // console.log(property.data)
-      console.log(escenaNueva)
+    // const getEscenaNueva = async (idNuevaEscena)=>{
+    //   const url = `http://127.0.0.1:8080/inmobiliaria360/inmueble/escena/escenaSola/${idNuevaEscena}`
+    //   let escenaNueva2 = {}
+    //   try {
+    //     const {data} = await axios.get(url)
+    //     escenaNueva2= data;
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+    //   console.log("Prueba 4")
+    //   // console.log(property.data)
+    //   console.log(escenaNueva2)
     
-      setEscenaNueva(escenaNueva);
-    }
+    //   setEscenaNueva(escenaNueva2);
+    // }
   
   
-    useEffect( () => {
-      getEscena();
-    }, []);
+    // useEffect( () => {
+    //   getEscenaNueva();
+    // }, []);
 
 
-    const [escena, setEscena] = useState(escenaCompleta);
-    const hotSpots = (element, i) => {
+    const [escena, setEscena] = useState(props.escenaCompleta);
+
+    const mostrarhotSpots = (element, i) => {
       if (element.cssClass === "hotSpotElement")
         return (
           <Pannellum.Hotspot
             key={i}
             type={element.type}
             yaw={element.yaw}
-            pisClass={element.cssClass}
-            hatch={element.pitch}
-            text="Hotspot de objeto"
-            csndleClick={() => alert("Click")}
+            // pisClass={element.cssClass}
+            cssClass={element.cssClass}
+            // hatch={element.pitch}
+            pith={element.pitch}
+            // text="Hotspot de objeto"
+            // csndleClick={() => alert("Click")}
+            handleClick={() => alert("Click")}
           />
         );
       else if (element.cssClass === "moveScene")
         var idEscenaNueva = Number(element.nextScene)
         return (
           console.log("entro a moveScene"),
-          console.log({element}),
+          // console.log({element}),
+          // console.log(escena),
           
           // console.log(escenas),
 
@@ -144,16 +151,30 @@ const Escena = ({escenaCompleta}) => {
               type={element.type}
               yaw={element.yaw}
               pitch={element.pitch}
-              handleClick={() => {
-                // setEscena(dataScene.find(({id})=>id===(element.nextScene).toString()));
-                // setEscena(escenas.find(({id})=>id===(element.nextScene).toString()));
-                // const escenaSiguiente = escenas.find(({escenaNueva}) =>escenaNueva.id===(element.nextScene).toString());
-                // setEscena(escenaSiguiente);
-                const escenaSiguiente = getEscena(idEscenaNueva);
-                setEscena(escenaSiguiente)
-              }}
               cssClass={element.cssClass}
-              text="Hotspot de siguiente escena"
+              handleClick={() => {
+                console.log(escena)
+                console.log (element.nextScene)
+
+                // setEscena(dataScene.find(({id})=>id===(element.nextScene).toString()));
+
+                setEscena(props.escenas.find((item => item.id == (element.nextScene))))
+
+                // setEscena(props.estado.find(({id})=>id===(element.nextScene).toString()));
+                // let escenaSiguiente = props.estado.find(({id})=>(id)===(element.nextScene).toString());
+                // setEscena(escenaSiguiente)
+
+                // const escenaSiguiente = listaEscenas.find(({escenaNueva}) =>escenaNueva.id===(element.nextScene).toString());
+                // setEscena(escenaSiguiente);
+                // const escenaSiguiente = getEscena(idEscenaNueva);
+
+                // const escenaSiguiente = getEscenaNueva(element.nextScene);
+                // setEscena(escenaNueva)
+
+                console.log("La siguiente escena es "+escena.title)
+              }}
+
+              // text="Hotspot de siguiente escena"
             />
           )
         );
@@ -174,7 +195,7 @@ const Escena = ({escenaCompleta}) => {
             hotspotDebug={true} //Boolean	false	For debug pupose (finding correct point for hotspot)
           >
             {Object.values(escena.hotSpotResponseDtoList).map((element, i) =>
-              hotSpots(element, i)
+              mostrarhotSpots(element, i)
             )}
           </Pannellum>
         )}

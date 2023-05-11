@@ -3,12 +3,12 @@ import insideTwo from "../images/PanoramaInterior2.png";
 
 const Scenes = [  // Arreglo de escenas 
   {
-    id: "insideOne",
+    id: "1",
     title: "interior 1",
     image: "https://res.cloudinary.com/back-pragma/image/upload/v1681707044/tesis/Prueba1_m4xukw.jpg",
     pitch: -11,
     yaw: -3,
-    hotSpot: {
+    hotSpotResponseDtoList: {
       flowerVase: {
         type: "custom",
         pitch: -16.28,
@@ -33,33 +33,33 @@ const Scenes = [  // Arreglo de escenas
         pitch: -8,
         yaw: 126,
         cssClass: "moveScene",
-        nextScene: "insideTwo",
+        nextScene: "2",
       },
     },
   },
   {
-    id: "insideTwo",
+    id: "2",
     title: "interior 2",
     image: "https://res.cloudinary.com/back-pragma/image/upload/v1681707044/tesis/Prueba1_m4xukw.jpg",
     pitch: 10,
     yaw: 180,
-    hotSpot: {
+    hotSpotResponseDtoList: {
       nexScene: {
         type: "custom",
         pitch: -8,
         yaw: 126,
         cssClass: "moveScene",
-        nextScene: "insideThree",
+        nextScene: "3",
       },
     },
   },
   {
-    id: "insideThree",
+    id: "3",
     title: "interior 3",
     image: insideOne,
     pitch: -11,
     yaw: -3,
-    hotSpot: {
+    hotSpotResponseDtoList: {
       flowerVase: {
         type: "custom",
         pitch: -16.28,
@@ -84,17 +84,17 @@ const Scenes = [  // Arreglo de escenas
         pitch: -8,
         yaw: 126,
         cssClass: "moveScene",
-        nextScene: "insideFour",
+        nextScene: "4",
       },
     },
   },
   {
-    id: "insideFour",
+    id: "4",
     title: "interior 4",
     image: insideTwo,
     pitch: 10,
     yaw: 180,
-    hotSpot: {},
+    hotSpotResponseDtoList: {},
   },
 ];
 //  {   insideOne:{ // Scene es un objeto que va a contener todas las escenas

@@ -5,7 +5,7 @@ const CustomMenu = (props) => {
     return (
       <div className="menu-bar col-3">
         <h3 className="menu-item">Menu</h3>
-        <ul>
+        <ul >
             {/* <button onClick={() => props.resetPage()}>
                 <li className="menu-item">Lista de propiedades</li>
             </button> */}

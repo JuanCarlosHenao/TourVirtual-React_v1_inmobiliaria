@@ -45,7 +45,7 @@ const Properties = (props) => {  // props sería el arreglo de inmuebles
                         name={property.name}
                         image={property.image}
                         price={property.price}
-                        handleClick={props.handleClick}
+                        // handleClick={props.handleClick}
                     >   
                     </Property>
                     </div>

@@ -3,9 +3,9 @@ import CustomMenu from "../components/menu/menu";
 import axios from "axios";
 import '../components/css/SaveInmueble.css';
 
-const EscenaSave = () => {
+const EscenaSave = (props) => {
     const [form,setForm]=useState({
-        // name:"",
+        inmueble_id:props.inmuebleId,
         // price:"",
         // description:"",
         // image:"",
@@ -52,7 +52,7 @@ const EscenaSave = () => {
 
     return (
       <div className="row">
-        <CustomMenu />
+        {/* <CustomMenu /> */}
         <div class="col-9">
           <div>
             <h1>Ingrese los datos de la escena a guardar</h1>
@@ -67,7 +67,8 @@ const EscenaSave = () => {
                 type="text"
                 id="inmueble_id"
                 name="inmueble_id"
-                value={form.inmueble_id}
+                // value={form.inmueble_id}
+                value = {props.inmuebleId}
                 onChange={handleChange}
               ></input>
 

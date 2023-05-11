@@ -29,22 +29,6 @@ export default function ListarEscenas (){
     }, []);
 
     return (
-      // <div>
-      //   <CustomMenu></CustomMenu>
-      //   <h1>Estas son las escenas de prueba 4 </h1>
-      //   <div>
-      //     <div>
-            // {escenas.map((item) => (
-            //   <div>
-
-            //     {/* {item.title} */}
-            //     <EscenaSola escenaCompleta={item} escenas={escenas}></EscenaSola>
-            //     {/* <EscenaSola escenaCompleta={dataScene[numberScene]}></EscenaSola> */}
-            //   </div>
-            // ))}
-      //     </div>
-      //   </div>
-      // </div>
       <div className="row">
         <CustomMenu></CustomMenu>
         <div class="col-9">
@@ -53,16 +37,20 @@ export default function ListarEscenas (){
             <h1>Formulario</h1>
           </div>
           <div className="row">
-            <EscenaSola escenaCompleta={escenas[0]} ></EscenaSola>
+            {/* <EscenaSola escenaCompleta={escenas[0]} estado = {escenas} ></EscenaSola> */}
             {escenas.map((item) => (
-              console.log("Las escenas son "+escenas.length),
+              console.log("La cantidad de escenas son "+escenas.length),
+              console.log("Las escenas a listar son " + escenas),
+              
+
                 <div>
 
                   {/* {item.title} */}
-                  <EscenaSola escenaCompleta={item} ></EscenaSola>
+                  <EscenaSola escenaCompleta={item} estado = {escenas}  ></EscenaSola>
                   {/* <EscenaSola escenaCompleta={dataScene[numberScene]}></EscenaSola> */}
                 </div>
             ))}
+
           </div>
         </div>
       </div>

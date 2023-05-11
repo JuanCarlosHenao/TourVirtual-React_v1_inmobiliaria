@@ -10,13 +10,10 @@ const Property = (props) => {
                 <p>{props.description}</p>
                 {/* <button className = "buttonProperty" onClick={() => props.handleClick(props.id-1)}>Ver detalles</button> */}
                 <button className = "buttonProperty" > 
-                    <Link to='/InmuebleDetalles' state= {{
-                        id :props.id,
-                        name:props.name,
-                        price:props.price,
-                        description:props.description,
-                        image:props.image, 
-                    }}>Ver detalles</Link>
+                    <Link to={`/InmuebleDetalles/`} state= {{id :props.id}}>Ver detalles</Link>
+                </button>
+                <button className = "buttonProperty" > 
+                    <Link to={`/InmuebleAEditar/`} state= {{id :props.id}}>Editar</Link>
                 </button>
             </div>
         </div>

@@ -2,9 +2,11 @@ import { useState } from "react";
 import CustomMenu from "../components/menu/menu";
 import axios from "axios";
 import '../components/css/SaveInmueble.css';
+import Select from "react-select";
 
-const HotSpotSave = () => {
+const HotSpotSave = (props) => {
     const [form,setForm]=useState({
+        escena_id:props.escenaId
         // name:"",
         // price:"",
         // description:"",
@@ -12,9 +14,14 @@ const HotSpotSave = () => {
     });
 
     const handleChange = (e) =>{
+      console.log({e})
 
       const { target } = e;
+      console.log(e.target.name)
+      console.log(e.target.value)
       const { name, value } = target;
+      // console.log(name)
+      // console.log(value)
 
 
       const newValues = {
@@ -23,6 +30,17 @@ const HotSpotSave = () => {
       };
         setForm(newValues);
     }
+
+    const handleSelect= (event) => {
+      console.log(event)
+      console.log(event.target)
+
+      //   setForm({
+      //     ...form,
+      //     [event.target]: event.target.select,
+      // });
+
+    } 
     // preguntar si un handleClick me puede traer los datos ?
     const handleChecked = (e) =>{
         setForm({
@@ -51,25 +69,24 @@ const HotSpotSave = () => {
 
 
     return (
-
-      <div className='row'>
-        <CustomMenu />
-        <div class='col-9'>
+      <div className="row">
+        {/* <CustomMenu /> */}
+        <div class="col-9">
           <div>
             <h1>Ingrese los datos del hotSpot a guardar</h1>
             <h1>Formulario</h1>
           </div>
-          <div className='row'>
-
+          <div className="row">
             <form onSubmit={handleSubmit}>
-            <label htmlFor="escena_id">
-                Ingrese el id de la escena del hotspot {" "}
+              <label htmlFor="escena_id">
+                Ingrese el id de la escena del hotspot{" "}
               </label>
               <input
                 type="text"
                 id="escena_id"
                 name="escena_id"
-                value={form.escena_id}
+                // value={form.escena_id}
+                value={props.escenaId}
                 onChange={handleChange}
               ></input>
               <br></br>
@@ -84,9 +101,7 @@ const HotSpotSave = () => {
                 onChange={handleChange}
               ></input>
               <br></br>
-              <label htmlFor="type">
-                Ingrese el type del hotspot
-              </label>
+              <label htmlFor="type">Ingrese el type del hotspot</label>
               <input
                 type="text"
                 id="type"
@@ -104,9 +119,7 @@ const HotSpotSave = () => {
                 onChange={handleChange}
               ></input>
               <br></br>
-              <label htmlFor="yaw">
-                Ingrese el yaw del hotSpot {" "}
-              </label>
+              <label htmlFor="yaw">Ingrese el yaw del hotSpot </label>
               <input
                 type="text"
                 id="yaw"
@@ -115,9 +128,7 @@ const HotSpotSave = () => {
                 onChange={handleChange}
               ></input>
               <br></br>
-              <label htmlFor="cssClass">
-                Ingrese la cssClass del hotSpot {" "}
-              </label>
+              <label htmlFor="cssClass">Ingrese la cssClass del hotSpot </label>
               <input
                 type="text"
                 id="cssClass"
@@ -127,22 +138,40 @@ const HotSpotSave = () => {
               ></input>
               <br></br>
               <label htmlFor="nextScene">
-                Ingrese la nextScene del hotSpot {" "}
+                Ingrese la nextScene del hotSpot{" "}
               </label>
-              <input
+              {/* <input
                 type="text"
                 id="nextScene"
                 name="nextScene"
                 value={form.nextScene}
                 onChange={handleChange}
-              ></input>
+              ></input> */}
+              {/* <Select
+                name = "nextScene"
+                id="nextScene"
+                options={props.escenas.map(item=>({label:item.title, value:item.id}))}
+                onChange={handleSelect}
+              
+              >
+                
+              </Select> */}
+              <select id="nextScene" name="nextScene" onChange={handleChange}>
+                {props.escenas.length === 0 ? (
+                  <div>
+                    <h1>No hay escenas en el inmueble </h1>
+                  </div>
+                ) : (
+                  props.escenas.map(item=>(
+                    <option value={item.id}>{item.title}</option>
+                  ))
+                )}
+              </select>
               <br></br>
               <button className="btn btn-primary">Submit</button>
             </form>
           </div>
         </div>
-
-
       </div>
     );
   }
