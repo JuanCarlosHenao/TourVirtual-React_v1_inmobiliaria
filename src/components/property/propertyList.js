@@ -31,7 +31,7 @@ const Properties = (props) => {  // props sería el arreglo de inmuebles
     // }]
 
     return (
-        <div class='col-9'>
+        <div class='col-9' style={{width:"82%"}}>
             <div>
                 <h1>Inmuebles</h1>
             </div>

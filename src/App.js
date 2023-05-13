@@ -10,7 +10,7 @@ import {
   RecoilRoot,
 } from 'recoil';
 
-import Example from './pages/example';
+
 
 
 import Inmueble from './pages/inmueble';
@@ -39,7 +39,6 @@ function App() {
       <BrowserRouter>
           <Routes>
                 <Route index element={<Home />}></Route>
-                <Route path='/example' element={<Example/>} ></Route>
                 <Route path='/inmuebledescripcion' element={<Inmueble/>} ></Route>
                 <Route path='/crearEscena' element={<h1>Escena a crear</h1>} ></Route>
                 <Route path='/escenas' element={<Escenas/>} ></Route>

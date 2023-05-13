@@ -130,7 +130,9 @@ const  Escena = (props) => {
             // pisClass={element.cssClass}
             cssClass={element.cssClass}
             // hatch={element.pitch}
-            pith={element.pitch}
+            pitch={element.pitch}
+            text={element.name}
+            URL="https://github.com/farminf/pannellum-react"
             // text="Hotspot de objeto"
             // csndleClick={() => alert("Click")}
             handleClick={() => alert("Click")}
@@ -145,44 +147,46 @@ const  Escena = (props) => {
           
           // console.log(escenas),
 
-          (
-            <Pannellum.Hotspot
-              key={i}
-              type={element.type}
-              yaw={element.yaw}
-              pitch={element.pitch}
-              cssClass={element.cssClass}
-              handleClick={() => {
-                console.log(escena)
-                console.log (element.nextScene)
+          
+          <Pannellum.Hotspot
+            key={i}
+            type={element.type}
+            yaw={element.yaw}
+            pitch={element.pitch}
+            cssClass={element.cssClass}
+            text={element.name}
+            handleClick={() => {
+              console.log(escena)
+              console.log (element.nextScene)
 
-                // setEscena(dataScene.find(({id})=>id===(element.nextScene).toString()));
+              // setEscena(dataScene.find(({id})=>id===(element.nextScene).toString()));
 
-                setEscena(props.escenas.find((item => item.id == (element.nextScene))))
+              setEscena(props.escenas.find((item => item.id == (element.nextScene))))
 
-                // setEscena(props.estado.find(({id})=>id===(element.nextScene).toString()));
-                // let escenaSiguiente = props.estado.find(({id})=>(id)===(element.nextScene).toString());
-                // setEscena(escenaSiguiente)
+              // setEscena(props.estado.find(({id})=>id===(element.nextScene).toString()));
+              // let escenaSiguiente = props.estado.find(({id})=>(id)===(element.nextScene).toString());
+              // setEscena(escenaSiguiente)
 
-                // const escenaSiguiente = listaEscenas.find(({escenaNueva}) =>escenaNueva.id===(element.nextScene).toString());
-                // setEscena(escenaSiguiente);
-                // const escenaSiguiente = getEscena(idEscenaNueva);
+              // const escenaSiguiente = listaEscenas.find(({escenaNueva}) =>escenaNueva.id===(element.nextScene).toString());
+              // setEscena(escenaSiguiente);
+              // const escenaSiguiente = getEscena(idEscenaNueva);
 
-                // const escenaSiguiente = getEscenaNueva(element.nextScene);
-                // setEscena(escenaNueva)
+              // const escenaSiguiente = getEscenaNueva(element.nextScene);
+              // setEscena(escenaNueva)
 
-                console.log("La siguiente escena es "+escena.title)
-              }}
+              console.log("La siguiente escena es "+escena.title)
+            }}
 
-              // text="Hotspot de siguiente escena"
-            />
-          )
+            // text="Hotspot de siguiente escena"
+          />
+          
         );
     };
 
     return (
       <div class="col-9">
-        {escena && (
+        {escena && 
+        (
           <Pannellum
             width="100%" // ancho
             height="100vh" // alto
@@ -198,7 +202,8 @@ const  Escena = (props) => {
               mostrarhotSpots(element, i)
             )}
           </Pannellum>
-        )}
+        )
+        }
       </div>
     );
 };

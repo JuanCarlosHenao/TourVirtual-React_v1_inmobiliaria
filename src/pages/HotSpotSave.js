@@ -129,13 +129,19 @@ const HotSpotSave = (props) => {
               ></input>
               <br></br>
               <label htmlFor="cssClass">Ingrese la cssClass del hotSpot </label>
-              <input
+              {/* <input
                 type="text"
                 id="cssClass"
                 name="cssClass"
                 value={form.cssClass}
                 onChange={handleChange}
-              ></input>
+              ></input> */}
+              <select id = "cssClass" name="cssClass" onChange={handleChange}>
+                <option value=""></option>
+                <option value="hotSpotElement">hotSpotElement</option>
+                <option value="moveScene">moveScene</option>
+
+              </select>
               <br></br>
               <label htmlFor="nextScene">
                 Ingrese la nextScene del hotSpot{" "}
@@ -157,11 +163,13 @@ const HotSpotSave = (props) => {
                 
               </Select> */}
               <select id="nextScene" name="nextScene" onChange={handleChange}>
+                <option value=""></option>
                 {props.escenas.length === 0 ? (
                   <div>
                     <h1>No hay escenas en el inmueble </h1>
                   </div>
                 ) : (
+                  <option value=""></option>,
                   props.escenas.map(item=>(
                     <option value={item.id}>{item.title}</option>
                   ))

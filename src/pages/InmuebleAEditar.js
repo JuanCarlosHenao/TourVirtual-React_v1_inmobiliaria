@@ -11,6 +11,8 @@ import EscenaCardList from '../components/EscenaCardList';
 import EscenaCard from '../components/EscenaCard';
 import { useRecoilState } from 'recoil';
 import state from '../state/state';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const InmuebleAEditar = (props) =>{
     // const location = useLocation();
@@ -55,6 +57,64 @@ const InmuebleAEditar = (props) =>{
         setButtonClicked(true)
     }
 
+    const [name,setName] = useState(property.name)
+    const [price,setPrice] = useState(property.price)
+    const [description,setDescription] = useState(property.description)
+    const [image,setImage] = useState(property.image)
+
+    const showToastMessage = () => {
+      toast.success('Inmueble actualizado correctamente', {
+          position: toast.POSITION.TOP_CENTER
+      });
+  };
+    
+    const handleSubmit = e => {
+      e.preventDefault();
+      const body = {
+        name:name,
+        price: price,
+        description: description,
+        image: image
+      }
+      // if (name!=property.name) {
+      //   body.name=name
+      // }
+      // if (price!=property.price) {
+      //   body.price=price
+      // }
+      // if (description!=property.description) {
+      //   body.description=description
+      // }
+      // if (image!=property.image) {
+      //   body.image=image
+      // }
+      // showToastMessage()
+      // mirar status 200 de la respuesta del axios y ahí enviar la notificación 
+      console.log(body)
+      // axios({
+      //   method: 'post',
+      //   url: 'http://localhost:8080/inmobiliaria360/publicarInmueble',
+      //   data:{
+
+      //   }
+      // });
+      axios
+      .put(`http://localhost:8080/inmobiliaria360/actualizarInmueble/${propertyId}`, 
+      // .put(`http://localhost:8080/inmobiliaria360/actualizarInmueble/50`, 
+        body
+      )
+      .then((response) => {
+        if(response.status===200){
+          showToastMessage()
+        }else{
+          console.log ("La petición no se envió de manera correcta")
+        }
+      });
+      // .then(showToastMessage())
+  }
+
+
+
     return (
       <div className="row">
         <CustomMenu></CustomMenu>
@@ -63,13 +123,21 @@ const InmuebleAEditar = (props) =>{
             <h1>Estos son los detalles del inmueble a editar</h1>
           </div>
           <div className="row">
-            <li>{property.id}</li>
-            <li>{property.name}</li>
-            <li>{property.price}</li>
-            <li>{property.createdDate}</li>
-            <li>{property.description}</li>
-            <li>{property.image}</li>
-            {/* <EscenaCardList escenas={property.escenaResponseDtoList} inmuebleId = {property.id}></EscenaCardList> */}
+            {/* <input value={property.id}>{property.id}</input> */}
+            <ToastContainer />
+            <form onSubmit={handleSubmit}>
+              <label>Nombre</label>
+              <input type="text" value = {name} onChange={e => setName(e.target.value)}></input>
+              <label>Precio</label>
+              <input type="text" value = {price} onChange={e => setPrice(e.target.value)}></input>
+              <label>Descripción</label>
+              <input type="text" value = {description} onChange={e => setDescription(e.target.value)}></input>
+              <label>Imagen</label>
+              <input type="text" value = {image} onChange={e => setImage(e.target.value)}></input>
+              <button type="submit">Guardar cambios</button>
+            </form>
+
+
             {property.escenaResponseDtoList.length === 0 ? (
               <div>
                 <h1>No hay escenas para mostrar </h1>
