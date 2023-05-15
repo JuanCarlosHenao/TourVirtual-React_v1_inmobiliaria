@@ -63,10 +63,11 @@ const InmuebleAEditar = (props) =>{
     const [image,setImage] = useState(property.image)
 
     const showToastMessage = () => {
-      toast.success('Inmueble actualizado correctamente', {
-          position: toast.POSITION.TOP_CENTER
+      toast.success("Inmueble actualizado correctamente", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1000
       });
-  };
+    };
     
     const handleSubmit = e => {
       e.preventDefault();
@@ -123,7 +124,6 @@ const InmuebleAEditar = (props) =>{
             <h1>Estos son los detalles del inmueble a editar</h1>
           </div>
           <div className="row">
-            {/* <input value={property.id}>{property.id}</input> */}
             <ToastContainer />
             <form onSubmit={handleSubmit}>
               <label>Nombre</label>

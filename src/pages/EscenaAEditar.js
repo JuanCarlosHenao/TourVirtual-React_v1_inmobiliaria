@@ -13,6 +13,9 @@ import HotSpotCardList from '../components/HotSpotCardList';
 import { useRecoilState } from 'recoil';
 import state from '../state/state';
 import HotSpotSave from './HotSpotSave';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const EscenaAEditar = (props) =>{
     // const location = useLocation();
@@ -53,18 +56,48 @@ const EscenaAEditar = (props) =>{
     const property  = properties.find(val => val.id === propertyId)
     const escena = property.escenaResponseDtoList.find(itemEscena => itemEscena.id === escenaId)
     const escenas = property.escenaResponseDtoList
-    // console.log(property)
-
-    // console.log(properties)
-
     console.log(escena)
-
-
     const [buttonClicked, setButtonClicked] = useState(false);
 
     const handleButtonClick = () => {
         setButtonClicked(true)
     }
+    const [inmueble_id,setInmuebleId]= useState(propertyId)
+    const [title,setTitle]=useState(escena.title)
+    const [image,setImage]= useState(escena.image)
+    const [pitch,setPitch] = useState(escena.pitch)
+    const [yaw,setYaw] = useState(escena.yaw)
+
+    const showToastMessage = () => {
+      toast.success("Escena actualizada correctamente", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    };
+
+    const handleSubmit = e => {
+      e.preventDefault();
+      const body = {
+        inmueble_id:inmueble_id,
+        title:title,
+        image: image,
+        pitch: pitch,
+        yaw: yaw
+      }
+
+      console.log(body)
+
+      axios
+      .put(`http://localhost:8080/inmobiliaria360/inmueble/escena/actualizarEscena/${escenaId}`, 
+        body
+      )
+      .then((response) => {
+        if(response.status===200){
+          showToastMessage()
+        }else{
+          console.log ("La petición no se envió de manera correcta")
+        }
+      });
+  }
 
     return (
       <div className="row">
@@ -74,12 +107,23 @@ const EscenaAEditar = (props) =>{
             <h1>Estos son los detalles de la escena a editar</h1>
           </div>
           <div className="row">
-            <li>{escena.id}</li>
-            <li>{escena.title}</li>
-            <li>{escena.image}</li>
-            <li>{escena.pitch}</li>
-            <li>{escena.yaw}</li>
-            {/* <HotSpotCardList hotspots = {escena.hotSpotResponseDtoList} escenaId = {escena.id} inmuebleId = {propertyId}></HotSpotCardList> */}
+            <ToastContainer />
+            <form onSubmit={handleSubmit}>
+              <label>Inmueble_id</label>
+              <input type="text" value={inmueble_id} onChange={e=>setInmuebleId(e.target.value)}></input>
+              <label>Título</label>
+              <input type="text" value={title} onChange={e=>setTitle(e.target.value)}></input>
+              <label>Imagen</label>
+              <input type="text" value={image} onChange={e=>setImage(e.target.value)}></input>
+              <label>Pïtch</label>
+              <input type="text" value={pitch} onChange={e=>setPitch(e.target.value)}></input>
+              <label>Yaw</label>
+              <input type="text" value={yaw} onChange={e=>setYaw(e.target.value)}></input>
+              <button type="submit">Guardar cambios</button>
+            </form>
+    
+
+
             <EscenaSola
               escenaCompleta={escena}
               escenas={property.escenaResponseDtoList}
