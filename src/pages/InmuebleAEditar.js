@@ -124,7 +124,7 @@ const InmuebleAEditar = (props) =>{
             <h1>Estos son los detalles del inmueble a editar</h1>
           </div>
           <div className="row">
-            <ToastContainer />
+            <ToastContainer closeButton/>
             <form onSubmit={handleSubmit}>
               <label>Nombre</label>
               <input type="text" value = {name} onChange={e => setName(e.target.value)}></input>
