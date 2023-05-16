@@ -8,8 +8,7 @@ import EscenaSola from "../components/escenasola";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Outlet } from "react-router-dom";
-import FormSaveInmueble from "../components/FormSaveInmueble";
-import EditPropertyList from "../components/EditPropertyList";
+import EditPropertyList from "../components/property/EditPropertyList";
 
 export default function EditarInmueble() {
   const [properties, setProperties] = useState([]);

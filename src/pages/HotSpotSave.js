@@ -1,12 +1,35 @@
 import { useState } from "react";
 import CustomMenu from "../components/menu/menu";
 import axios from "axios";
-import "../components/css/SaveInmueble.css";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+import { async } from "q";
 
 const HotSpotSave = (props) => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     escena_id: props.escenaId,
   });
+
+  const showToastMessageSuccess = () => {
+    toast.success("Hotspot agregado correctamente", {
+      position: toast.POSITION.TOP_CENTER,
+      // onClose: async (propis) => {
+      //   console.log("se cerró la notificación");
+      //   // navigate("/");
+      // },
+      hideProgressBar: false,
+      // onChange: console.log("cambió"),
+    });
+  };
+
+  const showToastMessageError = () => {
+    toast.error("Error agregando el hotspot", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  };
 
   const handleChange = (e) => {
     console.log({ e });
@@ -23,41 +46,40 @@ const HotSpotSave = (props) => {
     setForm(newValues);
   };
 
-  const handleSelect = (event) => {
-    console.log(event);
-    console.log(event.target);
-
-    //   setForm({
-    //     ...form,
-    //     [event.target]: event.target.select,
-    // });
-  };
-  // preguntar si un handleClick me puede traer los datos ?
-  const handleChecked = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.checked,
-    });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault(); // Para que no se recargue cuando valido el formulario
-    // alert("El formulario se ha enviado")
-    // axios.post('http://localhost:8080/inmobiliaria360/publicarInmueble',{form})
-    // .then(response => console.log(response))
-    // .catch(err => console.log(err))
-    axios({
-      method: "post",
-      url: "http://localhost:8080/inmobiliaria360/inmueble/escena/hotspot/savehotspot",
-      data: form,
-    });
-    console.log(form)
+
+    // axios({
+    //   method: "post",
+    //   url: "http://localhost:8080/inmobiliaria360/inmueble/escena/hotspot/savehotspot",
+    //   data: form,
+    // });
+    // console.log(form);
+
+    axios
+      .post(
+        "http://localhost:8080/inmobiliaria360/inmueble/escena/hotspot/savehotspot",
+        form
+      )
+      .then((response) => {
+        if (response.status === 201) {
+          console.log(form);
+          showToastMessageSuccess();
+          // navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.log("La petición no se envió de manera correcta");
+        console.log(err);
+        showToastMessageError();
+      });
   };
 
   return (
     <div className="row">
       {/* <CustomMenu /> */}
       <div class="col-9">
+        <ToastContainer />
         <div>
           <h1>Ingrese los datos del hotSpot a guardar</h1>
           <h1>Formulario</h1>
@@ -88,12 +110,8 @@ const HotSpotSave = (props) => {
             ></input>
             <br></br>
             <label htmlFor="type">Ingrese el type del hotspot </label>
-            <select
-              id="type"
-              name="type"
-              onChange={handleChange}
-            >
-              <option value="custom">custom</option>
+            <select id="type" name="type" onChange={handleChange}>
+              <option defaultValue={"custom"}>custom</option>
               <option value="info">info</option>
             </select>
             <br></br>
@@ -117,23 +135,37 @@ const HotSpotSave = (props) => {
             <br></br>
             <label htmlFor="cssClass">Ingrese la cssClass del hotSpot </label>
             <select id="cssClass" name="cssClass" onChange={handleChange}>
-              <option value="hotSpotElement">hotSpotElement</option>
+              <option defaultValue={"hotSpotElement"}>hotSpotElement</option>
               <option value="moveScene">moveScene</option>
             </select>
             <br></br>
-            <label htmlFor="nextScene">Ingrese la nextScene del hotSpot </label>
-            <select id="nextScene" name="nextScene" onChange={handleChange}>
-              {props.escenas.length === 0 ? (
-                <div>
-                  <h1>No hay escenas en el inmueble </h1>
-                </div>
-              ) : (
+            {form.cssClass === "moveScene"
+              ? (console.log("funciona"),
                 (
-                props.escenas.map((item) => (
-                  <option value={item.id}>{item.title}</option>
-                )))
-              )}
-            </select>
+                  <div>
+                    <label htmlFor="nextScene">
+                      Ingrese la nextScene del hotSpot{" "}
+                    </label>
+
+                    <select
+                      id="nextScene"
+                      name="nextScene"
+                      onChange={handleChange}
+                    >
+                      {props.escenas.length === 0 ? (
+                        <div>
+                          <h1>No hay escenas en el inmueble </h1>
+                        </div>
+                      ) : (
+                        props.escenas.map((item) => (
+                          <option value={item.id}>{item.title}</option>
+                        ))
+                      )}
+                    </select>
+                  </div>
+                ))
+              : (console.log("no funciona"), (form.nextScene = ""))}
+
             <br></br>
             <button className="btn btn-primary">Submit</button>
           </form>

@@ -1,23 +1,27 @@
-import "./property/EditPropertyList";
+import "./EditPropertyList";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
-const EscenaCard = (props) => {
+const EditProperty = (props) => {
   return (
     <div class="card">
       <img src={props.image} alt="" />
       <div class="description">
-        <h2>{props.title}</h2>
+        <h2>{props.name}</h2>
+        <p>{props.description}</p>
         <button className="buttonProperty">
           <Link
-            to="/EscenaAEditar"
+            to="/InmuebleAEditar"
             state={{
               id: props.id,
-              inmuebleId: props.inmuebleId,
+              name: props.name,
+              price: props.price,
+              description: props.description,
+              image: props.image,
             }}
           >
-            Editar escena
+            Editar Inmueble
           </Link>
         </button>
       </div>
@@ -25,4 +29,4 @@ const EscenaCard = (props) => {
   );
 };
 
-export default EscenaCard;
+export default EditProperty;
