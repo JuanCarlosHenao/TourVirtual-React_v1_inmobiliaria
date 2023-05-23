@@ -1,14 +1,9 @@
 import Properties from "../components/property/propertyList";
 import CustomMenu from "../components/menu/menu";
-// import Scene from '../components/scena';
 import "../styles/index.css";
 import "bootstrap/dist/css/bootstrap.css";
-import dataScene from "../components/dataScene";
-import EscenaSola from "../components/escenasola";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Outlet } from "react-router-dom";
-
 import { useRecoilState } from "recoil";
 import state from "../state/state";
 
@@ -40,12 +35,6 @@ function Home() {
         <CustomMenu></CustomMenu>
         <Properties properties={properties}></Properties>
       </div>
-      {/* esto es para las rutas hijas del home  */}
-      {/* <div>
-        <Outlet>
-            
-        </Outlet>
-      </div> */}
     </div>
   );
 }
