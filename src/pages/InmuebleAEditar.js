@@ -63,12 +63,7 @@ const InmuebleAEditar = (props) => {
   const showToastMessageSuccess = () => {
     toast.success("Inmueble actualizado correctamente", {
       position: toast.POSITION.TOP_CENTER,
-      // onClose: async (propis) => {
-      //   console.log("se cerró la notificación");
-      //   // navigate("/");
-      // },
       hideProgressBar: false,
-      // onChange: console.log("cambió"),
     });
   };
 
@@ -88,13 +83,6 @@ const InmuebleAEditar = (props) => {
     };
 
     console.log(body);
-    // axios({
-    //   method: 'post',
-    //   url: 'http://localhost:8080/inmobiliaria360/publicarInmueble',
-    //   data:{
-
-    //   }
-    // });
     axios
       .put(
         `http://localhost:8080/inmobiliaria360/actualizarInmueble/${propertyId}`,
