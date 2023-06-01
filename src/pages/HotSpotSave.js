@@ -76,102 +76,77 @@ const HotSpotSave = (props) => {
   };
 
   return (
-    <div className="row">
-      {/* <CustomMenu /> */}
-      <div class="col-9">
-        <ToastContainer />
-        <div>
-          <h1>Ingrese los datos del hotSpot a guardar</h1>
-          <h1>Formulario</h1>
-        </div>
-        <div className="row">
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="escena_id">
-              Ingrese el id de la escena del hotspot{" "}
-            </label>
-            <input
-              type="text"
-              id="escena_id"
-              name="escena_id"
-              // value={form.escena_id}
-              value={props.escenaId}
-              onChange={handleChange}
-            ></input>
-            <br></br>
-            <label htmlFor="name">Ingrese el nombre del hotspot </label>
-            {/* en value sería el label al cual hago referencia ,sería la variable del hook ,
+    <form onSubmit={handleSubmit} className="edit-form">
+      <ToastContainer />;
+      <label htmlFor="escena_id">Ingrese el id de la escena del hotspot </label>
+      <input
+        type="text"
+        id="escena_id"
+        name="escena_id"
+        // value={form.escena_id}
+        value={props.escenaId}
+        onChange={handleChange}
+      ></input>
+      <label htmlFor="name">Ingrese el nombre del hotspot</label>
+      {/* en value sería el label al cual hago referencia ,sería la variable del hook ,
               e es la funcion que dispara el cambio de estado  */}
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-            ></input>
-            <br></br>
-            <label htmlFor="type">Ingrese el type del hotspot </label>
-            <select id="type" name="type" onChange={handleChange}>
-              <option defaultValue={"custom"}>custom</option>
-              <option value="info">info</option>
-            </select>
-            <br></br>
-            <label htmlFor="pitch">Ingrese el pitch del hotspot</label>
-            <input
-              type="text"
-              id="pitch"
-              name="pitch"
-              value={form.pitch}
-              onChange={handleChange}
-            ></input>
-            <br></br>
-            <label htmlFor="yaw">Ingrese el yaw del hotSpot </label>
-            <input
-              type="text"
-              id="yaw"
-              name="yaw"
-              value={form.yaw}
-              onChange={handleChange}
-            ></input>
-            <br></br>
-            <label htmlFor="cssClass">Ingrese la cssClass del hotSpot </label>
-            <select id="cssClass" name="cssClass" onChange={handleChange}>
-              <option defaultValue={"hotSpotElement"}>hotSpotElement</option>
-              <option value="moveScene">moveScene</option>
-            </select>
-            <br></br>
-            {form.cssClass === "moveScene"
-              ? (console.log("funciona"),
-                (
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value={form.name}
+        onChange={handleChange}
+      ></input>
+      <label htmlFor="type">Ingrese el tipo del hotspot</label>
+      <select id="type" name="type" onChange={handleChange}>
+        <option defaultValue={"custom"}>custom</option>
+        <option value="info">info</option>
+      </select>
+      <label htmlFor="pitch">Ingrese el pitch del hotspot</label>
+      <input
+        type="text"
+        id="pitch"
+        name="pitch"
+        value={form.pitch}
+        onChange={handleChange}
+      ></input>
+      <label htmlFor="yaw">Ingrese el yaw del hotSpot </label>
+      <input
+        type="text"
+        id="yaw"
+        name="yaw"
+        value={form.yaw}
+        onChange={handleChange}
+      ></input>
+      <label htmlFor="cssClass">Ingrese la cssClass del hotSpot </label>
+      <select id="cssClass" name="cssClass" onChange={handleChange}>
+        <option defaultValue={"hotSpotElement"}>hotSpotElement</option>
+        <option value="moveScene">moveScene</option>
+      </select>
+      {form.cssClass === "moveScene"
+        ? (console.log("funciona"),
+          (
+            <div>
+              <label htmlFor="nextScene">
+                Ingrese la nextScene del hotSpot{" "}
+              </label>
+
+              <select id="nextScene" name="nextScene" onChange={handleChange}>
+                {props.escenas.length === 0 ? (
                   <div>
-                    <label htmlFor="nextScene">
-                      Ingrese la nextScene del hotSpot{" "}
-                    </label>
-
-                    <select
-                      id="nextScene"
-                      name="nextScene"
-                      onChange={handleChange}
-                    >
-                      {props.escenas.length === 0 ? (
-                        <div>
-                          <h1>No hay escenas en el inmueble </h1>
-                        </div>
-                      ) : (
-                        props.escenas.map((item) => (
-                          <option value={item.id}>{item.title}</option>
-                        ))
-                      )}
-                    </select>
+                    <h1>No hay escenas en el inmueble </h1>
                   </div>
-                ))
-              : (console.log("no funciona"), (form.nextScene = ""))}
-
-            <br></br>
-            <button className="btn btn-primary">Submit</button>
-          </form>
-        </div>
-      </div>
-    </div>
+                ) : (
+                  props.escenas.map((item) => (
+                    <option value={item.id}>{item.title}</option>
+                  ))
+                )}
+              </select>
+            </div>
+          ))
+        : (console.log("no funciona"), (form.nextScene = ""))}
+      <button className="submit-edit-btn">Confirmar</button>
+    </form>
   );
 };
 

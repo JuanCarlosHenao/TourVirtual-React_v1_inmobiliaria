@@ -8,10 +8,8 @@ import { useRecoilState } from "recoil";
 import state from "../state/state";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
 
 const HotSpotAEditar = (props) => {
-  const navigate = useNavigate();
   const [properties] = useRecoilState(state);
   const location = useLocation();
   console.log(location);
@@ -82,84 +80,72 @@ const HotSpotAEditar = (props) => {
   };
 
   return (
-    <div className="row">
+    <div className="App">
       <CustomMenu></CustomMenu>
-      <div class="col-9">
-        <div>
-          <h1>Estos son los detalles del hotSpot a editar</h1>
-        </div>
-        <div className="row">
-          <li>{hotSpot.id}</li>
-          <li>{hotSpot.name}</li>
-          <li>{hotSpot.type}</li>
-          <li>{hotSpot.pitch}</li>
-          <li>{hotSpot.yaw}</li>
-          <li>{hotSpot.cssClass}</li>
-          <li>{hotSpot.nextScene}</li>
-          <ToastContainer />
-          <form onSubmit={handleSubmit}>
-            <label>Escena_id</label>
-            <input
-              type="text"
-              value={escena_id}
-              onChange={(e) => setEscenaId(e.target.value)}
-            ></input>
-            <label>Name</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            ></input>
-            <label htmlFor="type">Type </label>
-            <select
-              id="type"
-              name="type"
-              onChange={(e) => setType(e.target.value)}
-            >
-              <option value="custom">custom</option>
-              <option value="info">info</option>
-            </select>
-            <label>Pitch</label>
-            <input
-              type="text"
-              value={pitch}
-              onChange={(e) => setPitch(e.target.value)}
-            ></input>
-            <label>Yaw</label>
-            <input
-              type="text"
-              value={yaw}
-              onChange={(e) => setYaw(e.target.value)}
-            ></input>
-            <label htmlFor="cssClass">Ingrese la cssClass del hotSpot </label>
-            <select
-              id="cssClass"
-              name="cssClass"
-              onChange={(e) => setCssClass(e.target.value)}
-            >
-              <option value="hotSpotElement">hotSpotElement</option>
-              <option value="moveScene">moveScene</option>
-            </select>
-            <label htmlFor="nextScene">Ingrese la nextScene del hotSpot </label>
-            <select
-              id="nextScene"
-              name="nextScene"
-              onChange={(e) => setNextScene(e.target.value)}
-            >
-              {property.escenaResponseDtoList.length === 0 ? (
-                <div>
-                  <h1>No hay escenas en el inmueble </h1>
-                </div>
-              ) : (
-                ((<option value=""></option>),
-                property.escenaResponseDtoList.map((item) => (
-                  <option value={item.id}>{item.title}</option>
-                )))
-              )}
-            </select>
-            <button type="submit">Guardar cambios</button>
-          </form>
-        </div>
+      <div className="edit-page" style={{ height: "100vh" }}>
+        <h1 className="edit-page-title">
+          Estos son los detalles del hotSpot a editar
+        </h1>
+        <ToastContainer />
+        <form onSubmit={handleSubmit} className="edit-form">
+          <label>Name</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          ></input>
+          <label htmlFor="type">Type </label>
+          <select
+            id="type"
+            name="type"
+            onChange={(e) => setType(e.target.value)}
+            value={type}
+          >
+            <option value="custom">custom</option>
+            <option value="info">info</option>
+          </select>
+          <label>Pitch</label>
+          <input
+            type="text"
+            value={pitch}
+            onChange={(e) => setPitch(e.target.value)}
+          ></input>
+          <label>Yaw</label>
+          <input
+            type="text"
+            value={yaw}
+            onChange={(e) => setYaw(e.target.value)}
+          ></input>
+          <label htmlFor="cssClass">Ingrese la cssClass del hotSpot </label>
+          <select
+            id="cssClass"
+            name="cssClass"
+            onChange={(e) => setCssClass(e.target.value)}
+          >
+            <option value="hotSpotElement">hotSpotElement</option>
+            <option value="moveScene">moveScene</option>
+          </select>
+          <label htmlFor="nextScene">Ingrese la nextScene del hotSpot </label>
+          <select
+            id="nextScene"
+            name="nextScene"
+            onChange={(e) => setNextScene(e.target.value)}
+          >
+            {property.escenaResponseDtoList.length === 0 ? (
+              <div>
+                <h1>No hay escenas en el inmueble </h1>
+              </div>
+            ) : (
+              ((<option value=""></option>),
+              property.escenaResponseDtoList.map((item) => (
+                <option value={item.id}>{item.title}</option>
+              )))
+            )}
+          </select>
+          <button type="submit" className="submit-edit-btn">
+            Guardar cambios
+          </button>
+        </form>
       </div>
     </div>
   );

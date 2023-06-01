@@ -1,25 +1,19 @@
-import "./property/EditPropertyList";
-import axios from "axios";
-import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const EscenaCard = (props) => {
+  const navigate = useNavigate();
+
+  const onClickCard = () => {
+    navigate("/EscenaAEditar/", {
+      state: { id: props.id, inmuebleId: props.inmuebleId },
+    });
+  };
   return (
-    <div class="card">
+    <div class="card" onClick={onClickCard}>
       <img src={props.image} alt="" />
       <div class="description">
-        <h2>{props.title}</h2>
-        <button className="buttonProperty">
-          <Link
-            to="/EscenaAEditar"
-            state={{
-              id: props.id,
-              inmuebleId: props.inmuebleId,
-            }}
-          >
-            Editar escena
-          </Link>
-        </button>
+        <h2 class="property-name property-name-no-limit">{props.title}</h2>
       </div>
     </div>
   );

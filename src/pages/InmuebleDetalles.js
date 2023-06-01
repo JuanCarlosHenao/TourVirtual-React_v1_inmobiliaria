@@ -8,12 +8,14 @@ import EscenaSave from "./EscenaSave";
 import ListarEscenas from "./ListarEscenas";
 import { useRecoilState } from "recoil";
 import state from "../state/state";
+import { useNavigate } from "react-router-dom";
 
 const InmuebleDetalles = (props) => {
   const [properties] = useRecoilState(state);
   const location = useLocation();
   const propertyId = location.state.id;
   const property = properties.find((val) => val.id === propertyId);
+  const navigate = useNavigate();
   console.log(property);
   // console.log(location)
   console.log(properties);
@@ -25,6 +27,10 @@ const InmuebleDetalles = (props) => {
     setButtonClicked(true);
   };
 
+  const goToEditHandler = () => {
+    navigate("/InmuebleAEditar/", { state: { propertyId } });
+  };
+
   return (
     <div className="App">
       <CustomMenu></CustomMenu>
@@ -32,26 +38,27 @@ const InmuebleDetalles = (props) => {
         <div className="inmueble-container">
           {/* <h1>Estos son los detalles del inmueble</h1> */}
 
-          <div className="inmueble-details">
+          <div
+            className="inmueble-details"
+            style={{
+              order: property.escenaResponseDtoList.length === 0 ? 0 : 2,
+            }}
+          >
             <p className="inmueble-name">{property.name.trim()}</p>
             <p>Descripción:{property.description}</p>
             <p className="inmueble-price">${property.price}</p>
-            <button className="inmueble-edit-btn">
-              <Link to={`/InmuebleAEditar/`} state={{ id: property.id }}>
-                Editar
-              </Link>
+            <button className="inmueble-edit-btn" onClick={goToEditHandler}>
+              Editar
             </button>
           </div>
           {property.escenaResponseDtoList.length === 0 ? (
             <div>
-              <h1>No hay escenas para mostrar </h1>
-              <span> Desea agregar una escena ? .</span>
-              <button
-                className="buttonProperty"
-                onClick={() => handleButtonClick()}
-              >
-                {/* <Link to={`/InmuebleAEditar/`} state= {{id :property.id}}>Editar</Link> */}
-              </button>
+              <h1 className="no-scenes-text">
+                Esta propiedad no tiene escenas para mostrar.
+              </h1>
+              <p className="add-scene-text">
+                Diríjase a editar propiedad para agregar escenas
+              </p>
               {buttonClicked ? <EscenaSave inmuebleId={property.id} /> : null}
             </div>
           ) : (

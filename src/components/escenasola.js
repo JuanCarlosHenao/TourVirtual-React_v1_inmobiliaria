@@ -25,7 +25,7 @@ const Escena = (props) => {
           cssClass={element.cssClass}
           pitch={element.pitch}
           text={element.name}
-          URL="https://github.com/farminf/pannellum-react"
+          // URL="https://github.com/farminf/pannellum-react"
           // text="Hotspot de objeto"
           // csndleClick={() => alert("Click")}
           handleClick={() => alert("Click")}

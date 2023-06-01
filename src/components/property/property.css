@@ -70,6 +70,12 @@
   -webkit-box-orient: vertical;
 }
 
+.property-name-no-limit {
+  max-lines: 3;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  line-clamp: 3;
+}
+
 .description {
   padding: 0 1em 1em 1em;
   line-height: 15px;

@@ -1,7 +1,7 @@
 import EscenaSola from "../components/escenasola";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { useLocation } from "react-router-dom";
 import CustomMenu from "../components/menu/menu";
 import EscenaSave from "./EscenaSave";
@@ -12,7 +12,7 @@ import { useRecoilState } from "recoil";
 import state from "../state/state";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+
 const InmuebleAEditar = (props) => {
   // const location = useLocation();
   // console.log(location.state);//"any type"
@@ -39,26 +39,43 @@ const InmuebleAEditar = (props) => {
   //   }, []);
 
   // ----------------------------------------------------------------
-  const navigate = useNavigate();
 
   const [properties] = useRecoilState(state);
   const location = useLocation();
-  const propertyId = location.state.id;
+  const propertyId = location.state.propertyId;
+
   const property = properties.find((val) => val.id === propertyId);
   console.log(property);
+
   // console.log(location)
   console.log(properties);
 
   const [buttonClicked, setButtonClicked] = useState(false);
 
-  const handleButtonClick = () => {
-    setButtonClicked(true);
-  };
-
   const [name, setName] = useState(property.name);
   const [price, setPrice] = useState(property.price);
   const [description, setDescription] = useState(property.description);
   const [image, setImage] = useState(property.image);
+
+  const [pageHeight, setPageHeight] = useState("100%");
+
+  useLayoutEffect(() => {
+    if (pageHeight === "100vh") {
+      property.escenaResponseDtoList.length > 0
+        ? setPageHeight("100%")
+        : setPageHeight("100vh");
+    } else {
+      setPageHeight("100vh");
+    }
+  }, [buttonClicked]);
+
+  const handleButtonClick = () => {
+    setButtonClicked((prev) => !prev);
+  };
+
+  const handleSceneAdded = () => {
+    setButtonClicked(false);
+  };
 
   const showToastMessageSuccess = () => {
     toast.success("Inmueble actualizado correctamente", {
@@ -102,84 +119,67 @@ const InmuebleAEditar = (props) => {
   };
 
   return (
-    <div className="row">
+    <div className="App">
       <CustomMenu></CustomMenu>
-      <div class="col-9">
-        <div>
-          <h1>Estos son los detalles del inmueble a editar</h1>
-        </div>
-        <div className="row">
-          <ToastContainer closeButton />
-          <form onSubmit={handleSubmit}>
-            <label>Nombre</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            ></input>
-            <label>Precio</label>
-            <input
-              type="text"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-            ></input>
-            <label>Descripción</label>
-            <input
-              type="text"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            ></input>
-            <label>Imagen</label>
-            <input
-              type="text"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-            ></input>
-            <button type="submit">Guardar cambios</button>
-          </form>
-
+      <div className="edit-page" style={{ height: pageHeight }}>
+        <h1 className="edit-page-title">
+          Detalles básicos del inmueble a editar
+        </h1>
+        <ToastContainer />
+        <form onSubmit={handleSubmit} className="edit-form">
+          <label>Nombre</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          ></input>
+          <label>Precio</label>
+          <input
+            type="text"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          ></input>
+          <label>Descripción</label>
+          <input
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          ></input>
+          <label>Imagen</label>
+          <input
+            type="text"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+          ></input>
+          <button type="submit" className="submit-edit-btn">
+            Guardar cambios
+          </button>
+        </form>
+        <div className="additional-edit-content">
           {property.escenaResponseDtoList.length === 0 ? (
-            <div>
-              <h1>No hay escenas para mostrar </h1>
-              <span> Desea agregar una escena ? .</span>
-              <button
-                className="buttonProperty"
-                onClick={() => handleButtonClick()}
-              >
-                {/* <Link to={`/InmuebleAEditar/`} state= {{id :property.id}}>Editar</Link> */}
-              </button>
-              {buttonClicked ? (
-                <EscenaSave
-                  inmuebleId={property.id}
-                  inmubleName={property.name}
-                  inmuebles={properties}
-                />
-              ) : null}
-            </div>
+            <>
+              <h4>No hay escenas para mostrar </h4>
+              <h5>¿Desea agregar una escena?</h5>
+            </>
           ) : (
-            <div className="sin-titulo">
-              <span> Desea agregar más escenas a este inmueble ? .</span>
-              <button
-                className="buttonProperty"
-                onClick={() => handleButtonClick()}
-              >
-                {/* <Link to={`/InmuebleAEditar/`} state= {{id :property.id}}>Editar</Link> */}
-              </button>
-              {buttonClicked ? (
-                <EscenaSave
-                  inmuebleId={property.id}
-                  inmubleName={property.name}
-                  inmuebles={properties}
-                />
-              ) : null}
-              <br></br>
-              <b>Las escenas son</b>
+            <>
+              <h4>El inmueble tiene las siguientes escenas:</h4>
               <EscenaCardList
                 escenas={property.escenaResponseDtoList}
                 inmuebleId={property.id}
               ></EscenaCardList>
-            </div>
+              <h5>¿Desea agregar más escenas a este inmueble?</h5>
+            </>
           )}
+          <button
+            className="submit-edit-btn"
+            onClick={() => handleButtonClick()}
+          >
+            Agregar
+          </button>
+          {buttonClicked ? (
+            <EscenaSave inmuebleId={property.id} onSave={handleSceneAdded} />
+          ) : null}
         </div>
       </div>
     </div>

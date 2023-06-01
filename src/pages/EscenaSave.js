@@ -64,74 +64,46 @@ const EscenaSave = (props) => {
   };
 
   return (
-    <div className="row">
-      {/* <CustomMenu /> */}
-      <div class="col-9">
-        <ToastContainer />
-        <div>
-          <h1>Ingrese los datos de la escena a guardar</h1>
-          <h1>Formulario</h1>
-        </div>
-        <div className="row">
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="inmueble_id">
-              Ingrese el id del inmueble de la escena{" "}
-            </label>
-            <input
-              type="text"
-              id="inmueble_id"
-              name="inmueble_id"
-              // value={form.inmueble_id}
-              value={props.inmuebleId}
-              onChange={handleChange}
-            ></input>
-
-            <br></br>
-            <label htmlFor="title">Ingrese el titulo de la escena </label>
-            {/* en value sería el label al cual hago referencia ,sería la variable del hook ,
+    <form onSubmit={handleSubmit} className="edit-form">
+      <ToastContainer />
+      <label htmlFor="title">Ingrese el titulo de la escena </label>
+      {/* en value sería el label al cual hago referencia ,sería la variable del hook ,
               e es la funcion que dispara el cambio de estado  */}
-            <input
-              type="text"
-              id="title"
-              name="title"
-              value={form.title}
-              onChange={handleChange}
-            ></input>
-            <br></br>
-            <label htmlFor="image">
-              Ingrese la url de la imagen de la escena
-            </label>
-            <input
-              type="text"
-              id="image"
-              name="image"
-              value={form.image}
-              onChange={handleChange}
-            ></input>
-            <br></br>
-            <label htmlFor="pitch">Ingrese el pitch de la escena</label>
-            <input
-              type="text"
-              id="pitch"
-              name="pitch"
-              value={form.pitch}
-              onChange={handleChange}
-            ></input>
-            <br></br>
-            <label htmlFor="yaw">Ingrese el yaw de la escena </label>
-            <input
-              type="text"
-              id="yaw"
-              name="yaw"
-              value={form.yaw}
-              onChange={handleChange}
-            ></input>
-            <br></br>
-            <button className="btn btn-primary">Submit</button>
-          </form>
-        </div>
-      </div>
-    </div>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        value={form.title}
+        onChange={handleChange}
+      ></input>
+      <label htmlFor="image">Ingrese la url de la imagen de la escena</label>
+      <input
+        type="text"
+        id="image"
+        name="image"
+        value={form.image}
+        onChange={handleChange}
+      ></input>
+      <label htmlFor="pitch">Ingrese el pitch de la escena</label>
+      <input
+        type="text"
+        id="pitch"
+        name="pitch"
+        value={form.pitch}
+        onChange={handleChange}
+      ></input>
+      <label htmlFor="yaw">Ingrese el yaw de la escena </label>
+      <input
+        type="text"
+        id="yaw"
+        name="yaw"
+        value={form.yaw}
+        onChange={handleChange}
+      ></input>
+      <button type="submit" className="submit-edit-btn">
+        Confirmar
+      </button>
+    </form>
   );
 };
 
