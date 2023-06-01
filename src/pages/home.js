@@ -31,10 +31,8 @@ function Home() {
 
   return (
     <div className="App">
-      <div className="row">
-        <CustomMenu></CustomMenu>
-        <Properties properties={properties}></Properties>
-      </div>
+      <CustomMenu></CustomMenu>
+      <Properties properties={properties}></Properties>
     </div>
   );
 }

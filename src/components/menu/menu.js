@@ -5,28 +5,24 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const CustomMenu = (props) => {
   return (
-    <div className="menu-bar col-3">
+    <div className="menu-bar">
       <div className="fixed-content">
-        <h3 style={{ color: "white", marginBottom: "1rem" }}>Menu</h3>
-        <ul
-          style={{
-            padding: 0,
-            marginTop: "1rem",
-            gap: "1.5rem",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
+        <h3 className="title">Menu</h3>
+        <ul className="links">
           <li className="menu-item">
-            <FontAwesomeIcon icon="fa-solid fa-house" />
-            <Link to="/">Lista de propiedades </Link>
+            <Link to="/">
+              <FontAwesomeIcon icon="fa-solid fa-house" />
+              <label className="link-label">Lista de propiedades</label>
+            </Link>
           </li>
           <li className="menu-item">
-            <FontAwesomeIcon
-              icon="fa-solid fa-plus"
-              style={{ color: "#ffffff" }}
-            />
-            <Link to="/saveInmueble">Agregar inmueble </Link>
+            <Link to="/saveInmueble">
+              <FontAwesomeIcon
+                icon="fa-solid fa-plus"
+                style={{ color: "#ffffff" }}
+              />
+              <label className="link-label">Agregar inmueble</label>
+            </Link>
           </li>
         </ul>
       </div>

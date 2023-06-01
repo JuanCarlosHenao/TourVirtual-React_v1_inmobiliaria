@@ -26,63 +26,20 @@ const InmuebleDetalles = (props) => {
   };
 
   return (
-    <div className="row">
+    <div className="App">
       <CustomMenu></CustomMenu>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "82%",
-          height: "100vh",
-          padding: 0,
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            width: "90%",
-          }}
-        >
+      <div className="inmueble-page">
+        <div className="inmueble-container">
           {/* <h1>Estos son los detalles del inmueble</h1> */}
 
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              order: 2,
-              listStyle: "none",
-              alignSelf: "center",
-              backgroundColor: "beige",
-              padding: "1rem",
-              borderRadius: "10px",
-              width: "45%",
-            }}
-          >
-            <p style={{ fontWeight: 700, fontSize: "24px" }}>
-              {property.name.trim()}
-            </p>
+          <div className="inmueble-details">
+            <p className="inmueble-name">{property.name.trim()}</p>
             <p>Descripción:{property.description}</p>
-            <p style={{ fontWeight: 700, fontSize: "20px" }}>
-              ${property.price}
-            </p>
-            <button
-              style={{
-                marginTop: "1rem",
-                width: "5rem",
-                backgroundColor: "rgb(4, 8, 63)",
-                color: "white",
-                padding: "0.5rem 1rem",
-                border: "none",
-                borderRadius: "5px",
-              }}
-            >
+            <p className="inmueble-price">${property.price}</p>
+            <button className="inmueble-edit-btn">
               <Link to={`/InmuebleAEditar/`} state={{ id: property.id }}>
                 Editar
               </Link>
-              {/* Editar */}
             </button>
           </div>
           {property.escenaResponseDtoList.length === 0 ? (

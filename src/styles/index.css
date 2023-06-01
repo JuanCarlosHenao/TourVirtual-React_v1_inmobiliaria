@@ -4,6 +4,12 @@
   padding: 0;
   margin: 0;
   font-family: "Open Sans", sans-serif;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }
 
 html,
@@ -13,4 +19,137 @@ body {
 
 .scene-container {
   width: 500px;
+}
+
+.App {
+  display: flex;
+}
+
+.inmueble-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 0;
+}
+
+.inmueble-container {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.inmueble-details {
+  display: flex;
+  flex-direction: column;
+  order: 2;
+  list-style: none;
+  align-self: center;
+  background-color: beige;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 45%;
+  min-width: 400px;
+}
+
+.inmueble-name {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.inmueble-price {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.inmueble-edit-btn {
+  margin-top: 1rem;
+  width: 5rem;
+  background-color: rgb(4, 8, 63);
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.add-inmueble-page {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+.add-inmueble-title {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.add-inmueble-label {
+  width: 100%;
+  font-weight: 700;
+  margin-top: 1rem;
+  max-width: 350px;
+}
+
+.add-inmueble-input {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgb(4, 8, 63);
+  height: 2rem;
+  padding: 1rem;
+  max-width: 350px;
+}
+
+.add-inmueble-button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(4, 8, 63);
+  max-width: 100px;
+}
+
+@media (max-width: 1260px) {
+  .inmueble-container {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .App {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .menu-bar {
+    width: 100%;
+  }
+
+  .add-inmueble-page {
+    margin-top: 3rem;
+  }
+}
+
+@media (max-width: 530px) {
+  .scene-container {
+    width: 100%;
+  }
+
+  .inmueble-details {
+    width: 100%;
+    padding: 2rem;
+    min-width: none;
+  }
+
+  .inmueble-container {
+    margin-top: 5rem;
+  }
 }

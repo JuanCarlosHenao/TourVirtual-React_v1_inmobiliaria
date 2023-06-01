@@ -3,6 +3,18 @@ import React, { useState, useEffect } from "react";
 
 const Escena = (props) => {
   const [escena, setEscena] = useState(props.escenaCompleta);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setScreenWidth(window.innerWidth);
+      window.addEventListener("resize", handleWindowResize);
+
+      return () => {
+        window.removeEventListener("resize", handleWindowResize);
+      };
+    };
+  }, []);
   const mostrarhotSpots = (element, i) => {
     if (element.cssClass === "hotSpotElement")
       return (
@@ -50,7 +62,7 @@ const Escena = (props) => {
       {escena && (
         <Pannellum
           width="100%" // ancho
-          height="500px" // alto
+          height={screenWidth >= 500 ? "500px" : "300px"} // alto
           image={escena.image}
           pitch={escena.pitch}
           yaw={escena.yaw}

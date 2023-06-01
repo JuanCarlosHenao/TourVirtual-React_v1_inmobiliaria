@@ -8,22 +8,13 @@ const Properties = (props) => {
     navigate("/InmuebleDetalles/", { state: { id } });
   };
   return (
-    <div
-      style={{
-        width: "82%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center", // alinea titulo al centro
-        paddingTop: "1rem", // pone distancia arriba
-      }}
-    >
-      <h1 style={{ fontWeight: 700 }}>Inmuebles</h1>
+    <div className="properties-container">
+      <h1 className="properties-title">Inmuebles</h1>
 
-      <div className="row">
+      <div className="properties">
         {props.properties.map((property) => {
           return (
-            <div className="col-4" key={property.id}>
+            <div key={property.id}>
               <Property
                 id={property.id}
                 description={property.description}

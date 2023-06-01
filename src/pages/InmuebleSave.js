@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// import "../components/css/SaveInmueble.css";
 
 const SaveInmueble = () => {
   const navigate = useNavigate();
@@ -57,61 +58,79 @@ const SaveInmueble = () => {
   };
 
   return (
-    <div className="row">
+    <div className="App">
       <CustomMenu />
-      <div class="col-9">
+      <div className="add-inmueble-page">
         <ToastContainer />
-        <div>
-          <h1>Ingrese los datos del inmueble a guardar</h1>
-          <h1>Formulario</h1>
-        </div>
-        <div className="row">
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="name">Ingrese el nombre del inmueble </label>
-            {/* en value sería el label al cual hago referencia ,sería la variable del hook ,
+        <h1 className="add-inmueble-title">
+          Ingrese los datos del inmueble a guardar
+        </h1>
+        <form
+          onSubmit={handleSubmit}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <label htmlFor="name" className="add-inmueble-label">
+            Nombre
+          </label>
+          {/* en value sería el label al cual hago referencia ,sería la variable del hook ,
               e es la funcion que dispara el cambio de estado  */}
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-            ></input>
-            <br></br>
-            <label htmlFor="price">Ingrese el precio del inmueble</label>
-            <input
-              type="text"
-              id="price"
-              name="price"
-              value={form.price}
-              onChange={handleChange}
-            ></input>
-            <br></br>
-            <label htmlFor="description">
-              Ingrese la descripcion del inmueble{" "}
-            </label>
-            <input
-              type="text"
-              id="description"
-              name="description"
-              value={form.description}
-              onChange={handleChange}
-            ></input>
-            <br></br>
-            <label htmlFor="image">
-              Ingrese la url de la imagen principal del inmueble{" "}
-            </label>
-            <input
-              type="text"
-              id="image"
-              name="image"
-              value={form.image}
-              onChange={handleChange}
-            ></input>
-            <br></br>
-            <button className="btn btn-primary">Submit</button>
-          </form>
-        </div>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            className="add-inmueble-input"
+            placeholder="Nombre del inmueble"
+          ></input>
+          <br></br>
+          <label htmlFor="price" className="add-inmueble-label">
+            Precio
+          </label>
+          <input
+            type="text"
+            id="price"
+            name="price"
+            value={form.price}
+            onChange={handleChange}
+            className="add-inmueble-input"
+            placeholder="Precio del inmueble"
+          ></input>
+          <br></br>
+          <label htmlFor="description" className="add-inmueble-label">
+            Descripcion
+          </label>
+          <input
+            type="text"
+            id="description"
+            name="description"
+            value={form.description}
+            onChange={handleChange}
+            className="add-inmueble-input"
+            placeholder="Descripción del inmueble"
+          ></input>
+          <br></br>
+          <label htmlFor="image" className="add-inmueble-label">
+            URL de la imagen principal
+          </label>
+          <input
+            type="text"
+            id="image"
+            name="image"
+            value={form.image}
+            onChange={handleChange}
+            className="add-inmueble-input"
+            placeholder="Imagen del inmueble"
+          ></input>
+          <br></br>
+          <button className="add-inmueble-button">Submit</button>
+        </form>
       </div>
     </div>
   );
