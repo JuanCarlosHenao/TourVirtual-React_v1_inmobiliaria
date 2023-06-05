@@ -1,6 +1,6 @@
 import "./styles/index.css";
 import "bootstrap/dist/css/bootstrap.css";
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/home";
 import { library } from "@fortawesome/fontawesome-svg-core";

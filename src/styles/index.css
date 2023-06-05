@@ -12,10 +12,10 @@
   display: none;
 }
 
-html,
+/* html,
 body {
   height: 100%;
-}
+} */
 
 .scene-container {
   width: 500px;
@@ -30,7 +30,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
   padding: 0;
   width: 100%;
 }
@@ -144,6 +144,7 @@ body {
   font-size: 30px;
   font-weight: 700;
   align-self: center;
+  height: 100%;
 }
 
 .edit-form {

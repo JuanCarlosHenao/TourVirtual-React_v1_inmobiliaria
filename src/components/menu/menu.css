@@ -8,6 +8,7 @@
   /* align-items: flex-start; */
   justify-content: flex-start;
   gap: 1rem;
+  min-height: 100vh;
 }
 
 .title {
@@ -37,6 +38,7 @@
     margin: 0;
     justify-content: center;
     z-index: 10;
+    min-height: auto;
   }
 
   .fixed-content {

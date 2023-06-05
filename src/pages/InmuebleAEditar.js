@@ -57,17 +57,17 @@ const InmuebleAEditar = (props) => {
   const [description, setDescription] = useState(property.description);
   const [image, setImage] = useState(property.image);
 
-  const [pageHeight, setPageHeight] = useState("100%");
+  // const [pageHeight, setPageHeight] = useState("100%");
 
-  useLayoutEffect(() => {
-    if (pageHeight === "100vh") {
-      property.escenaResponseDtoList.length > 0
-        ? setPageHeight("100%")
-        : setPageHeight("100vh");
-    } else {
-      setPageHeight("100vh");
-    }
-  }, [buttonClicked]);
+  // useLayoutEffect(() => {
+  //   if (pageHeight === "100vh") {
+  //     property.escenaResponseDtoList.length > 0
+  //       ? setPageHeight("100%")
+  //       : setPageHeight("100vh");
+  //   } else {
+  //     setPageHeight("100vh");
+  //   }
+  // }, [buttonClicked]);
 
   const handleButtonClick = () => {
     setButtonClicked((prev) => !prev);
@@ -121,7 +121,8 @@ const InmuebleAEditar = (props) => {
   return (
     <div className="App">
       <CustomMenu></CustomMenu>
-      <div className="edit-page" style={{ height: pageHeight }}>
+      {/* <div className="edit-page" style={{ height: pageHeight }}> */}
+      <div className="edit-page">
         <h1 className="edit-page-title">
           Detalles básicos del inmueble a editar
         </h1>
