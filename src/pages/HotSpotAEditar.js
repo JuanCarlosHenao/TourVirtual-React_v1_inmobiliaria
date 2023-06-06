@@ -8,37 +8,87 @@ import { useRecoilState } from "recoil";
 import state from "../state/state";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const HotSpotAEditar = (props) => {
+  const navigate = useNavigate();
   const [properties] = useRecoilState(state);
   const location = useLocation();
   console.log(location);
+
   const inmuebleId = location.state.inmuebleId;
   const escenaId = location.state.escenaId;
   const hotSpotId = location.state.id;
-  console.log("el hotSpotId es ");
-  console.log(hotSpotId);
-  const property = properties.find((val) => val.id === inmuebleId);
-  const escena = property.escenaResponseDtoList.find(
-    (itemEscena) => itemEscena.id === escenaId
-  );
-  const hotSpot = escena.hotSpotResponseDtoList.find(
-    (itemHotSpot) => itemHotSpot.id === hotSpotId
-  );
-  console.log(hotSpot);
 
   const [escena_id, setEscenaId] = useState(escenaId);
-  const [name, setName] = useState(hotSpot.name);
-  const [type, setType] = useState(hotSpot.type);
-  const [pitch, setPitch] = useState(hotSpot.pitch);
-  const [yaw, setYaw] = useState(hotSpot.yaw);
-  const [cssClass, setCssClass] = useState(hotSpot.cssClass);
-  const [nextScene, setNextScene] = useState(hotSpot.nextScene);
+
+  const [pageLoading, setPageLoading] = useState(true);
+  const [property, setProperty] = useState(null);
+  const [escena, setEscena] = useState(null);
+  const [hotSpot, setHotSpot] = useState(null);
+  console.log("el hotSpotId es ");
+  console.log(hotSpotId);
+
+  // const property = properties.find((val) => val.id === inmuebleId);
+  // const escena = property.escenaResponseDtoList.find(
+  //   (itemEscena) => itemEscena.id === escenaId
+  // );
+  // const hotSpot = escena.hotSpotResponseDtoList.find(
+  //   (itemHotSpot) => itemHotSpot.id === hotSpotId
+  // );
+  // console.log(hotSpot);
+
+  // const [escena_id, setEscenaId] = useState(escenaId);
+  // const [name, setName] = useState(hotSpot.name);
+  // const [type, setType] = useState(hotSpot.type);
+  // const [pitch, setPitch] = useState(hotSpot.pitch);
+  // const [yaw, setYaw] = useState(hotSpot.yaw);
+  // const [cssClass, setCssClass] = useState(hotSpot.cssClass);
+  // const [nextScene, setNextScene] = useState(hotSpot.nextScene);
+
+  const [name, setName] = useState(null);
+  const [type, setType] = useState(null);
+  const [pitch, setPitch] = useState(null);
+  const [yaw, setYaw] = useState(null);
+  const [cssClass, setCssClass] = useState(null);
+  const [nextScene, setNextScene] = useState(null);
+
+  useEffect(() => {
+    if (properties.length === 0) {
+      navigate("/");
+    } else {
+      const property = properties.find((val) => val.id === inmuebleId);
+      const escena = property.escenaResponseDtoList.find(
+        (itemEscena) => itemEscena.id === escenaId
+      );
+      const hotSpot = escena.hotSpotResponseDtoList.find(
+        (itemHotSpot) => itemHotSpot.id === hotSpotId
+      );
+      setProperty(property);
+      setEscena(escena);
+      setHotSpot(hotSpot);
+      setName(hotSpot.name);
+      setType(hotSpot.type);
+      setPitch(hotSpot.pitch);
+      setYaw(hotSpot.yaw);
+      setCssClass(hotSpot.cssClass);
+      setNextScene(hotSpot.nextScene);
+      setPageLoading(false);
+    }
+  }, []);
 
   const showToastMessageSuccess = () => {
     toast.success("Hotspot actualizado correctamente", {
       position: toast.POSITION.TOP_CENTER,
       hideProgressBar: false,
+    });
+    toast.onChange((payload) => {
+      if (payload.status === "removed" && payload.type === toast.TYPE.SUCCESS) {
+        // navigate(location.pathname);
+        navigate("/");
+      } else {
+        return;
+      }
     });
   };
 
@@ -82,7 +132,76 @@ const HotSpotAEditar = (props) => {
   return (
     <div className="App">
       <CustomMenu></CustomMenu>
-      <div className="edit-page" style={{ height: "100vh" }}>
+      <div className="edit-page">
+        {pageLoading ? (
+          <>Loading...</>
+        ) : (
+          <>
+            <h1 className="edit-page-title">
+              Estos son los detalles del hotSpot a editar
+            </h1>
+            <ToastContainer />
+            <form onSubmit={handleSubmit} className="edit-form">
+              <label>Name</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              ></input>
+              <label htmlFor="type">Type </label>
+              <select name="type" onChange={(e) => setType(e.target.value)}>
+                <option value="custom">custom</option>
+                <option value="info">info</option>
+              </select>
+              <label>Pitch</label>
+              <input
+                type="text"
+                value={pitch}
+                onChange={(e) => setPitch(e.target.value)}
+              ></input>
+              <label>Yaw</label>
+              <input
+                type="text"
+                value={yaw}
+                onChange={(e) => setYaw(e.target.value)}
+              ></input>
+              <label htmlFor="cssClass">Ingrese la cssClass del hotSpot </label>
+              <select
+                id="cssClass"
+                name="cssClass"
+                onChange={(e) => setCssClass(e.target.value)}
+              >
+                <option value="hotSpotElement">hotSpotElement</option>
+                <option value="moveScene">moveScene</option>
+              </select>
+              <label htmlFor="nextScene">
+                Ingrese la nextScene del hotSpot{" "}
+              </label>
+              <select
+                id="nextScene"
+                name="nextScene"
+                onChange={(e) => setNextScene(e.target.value)}
+              >
+                {property.escenaResponseDtoList.length === 0 ? (
+                  <div>
+                    <h1>No hay escenas en el inmueble </h1>
+                  </div>
+                ) : (
+                  ((<option value=""></option>),
+                  property.escenaResponseDtoList.map((item) => (
+                    <option value={item.id}>{item.title}</option>
+                  )))
+                )}
+              </select>
+              <button type="submit" className="submit-edit-btn">
+                Guardar cambios
+              </button>
+            </form>
+          </>
+        )}
+      </div>
+      {/* -------------------------------------------------------------- */}
+      {/* <div className="edit-page" style={{ height: "100vh" }}>
         <h1 className="edit-page-title">
           Estos son los detalles del hotSpot a editar
         </h1>
@@ -146,7 +265,8 @@ const HotSpotAEditar = (props) => {
             Guardar cambios
           </button>
         </form>
-      </div>
+      </div> */}
+      {/* -------------------------------------------------------------- */}
     </div>
   );
 };

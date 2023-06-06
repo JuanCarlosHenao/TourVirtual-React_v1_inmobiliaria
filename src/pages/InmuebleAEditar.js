@@ -12,6 +12,7 @@ import { useRecoilState } from "recoil";
 import state from "../state/state";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const InmuebleAEditar = (props) => {
   // const location = useLocation();
@@ -39,23 +40,49 @@ const InmuebleAEditar = (props) => {
   //   }, []);
 
   // ----------------------------------------------------------------
+  const navigate = useNavigate();
 
   const [properties] = useRecoilState(state);
   const location = useLocation();
+  console.log(location);
   const propertyId = location.state.propertyId;
 
-  const property = properties.find((val) => val.id === propertyId);
+  const [pageLoading, setPageLoading] = useState(true);
+  const [property, setProperty] = useState(null);
+
   console.log(property);
 
-  // console.log(location)
+  // const property = properties.find((val) => val.id === propertyId);
+  // console.log(property);
+
+  // // console.log(location)
   console.log(properties);
 
   const [buttonClicked, setButtonClicked] = useState(false);
 
-  const [name, setName] = useState(property.name);
-  const [price, setPrice] = useState(property.price);
-  const [description, setDescription] = useState(property.description);
-  const [image, setImage] = useState(property.image);
+  // const [name, setName] = useState(property.name);
+  // const [price, setPrice] = useState(property.price);
+  // const [description, setDescription] = useState(property.description);
+  // const [image, setImage] = useState(property.image);
+
+  const [name, setName] = useState(null);
+  const [price, setPrice] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [image, setImage] = useState(null);
+
+  useEffect(() => {
+    if (properties.length === 0) {
+      navigate("/");
+    } else {
+      const property = properties.find((val) => val.id === propertyId);
+      setProperty(property);
+      setName(property.name);
+      setPrice(property.price);
+      setDescription(property.description);
+      setImage(property.image);
+      setPageLoading(false);
+    }
+  }, []);
 
   // const [pageHeight, setPageHeight] = useState("100%");
 
@@ -81,6 +108,14 @@ const InmuebleAEditar = (props) => {
     toast.success("Inmueble actualizado correctamente", {
       position: toast.POSITION.TOP_CENTER,
       hideProgressBar: false,
+    });
+    toast.onChange((payload) => {
+      if (payload.status === "removed" && payload.type === toast.TYPE.SUCCESS) {
+        // navigate(location.pathname);
+        navigate("/");
+      } else {
+        return;
+      }
     });
   };
 
@@ -123,7 +158,77 @@ const InmuebleAEditar = (props) => {
       <CustomMenu></CustomMenu>
       {/* <div className="edit-page" style={{ height: pageHeight }}> */}
       <div className="edit-page">
-        <h1 className="edit-page-title">
+        {pageLoading ? (
+          <>Loading...</>
+        ) : (
+          <>
+            <h1 className="edit-page-title">
+              Detalles básicos del inmueble a editar
+            </h1>
+            <ToastContainer />
+            <form onSubmit={handleSubmit} className="edit-form">
+              <label>Nombre</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              ></input>
+              <label>Precio</label>
+              <input
+                type="text"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              ></input>
+              <label>Descripción</label>
+              <input
+                type="text"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              ></input>
+              <label>Imagen</label>
+              <input
+                type="text"
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+              ></input>
+              <button type="submit" className="submit-edit-btn">
+                Guardar cambios
+              </button>
+            </form>
+            <div className="additional-edit-content">
+              {property.escenaResponseDtoList.length === 0 ? (
+                <>
+                  <h4>No hay escenas para mostrar </h4>
+                  <h5>¿Desea agregar una escena?</h5>
+                </>
+              ) : (
+                <>
+                  <h4>El inmueble tiene las siguientes escenas:</h4>
+                  <EscenaCardList
+                    escenas={property.escenaResponseDtoList}
+                    inmuebleId={property.id}
+                  ></EscenaCardList>
+                  <h5>¿Desea agregar más escenas a este inmueble?</h5>
+                </>
+              )}
+              <button
+                className="submit-edit-btn"
+                onClick={() => handleButtonClick()}
+              >
+                Agregar
+              </button>
+              {buttonClicked ? (
+                <EscenaSave
+                  inmuebleId={property.id}
+                  onSave={handleSceneAdded}
+                />
+              ) : null}
+            </div>
+          </>
+        )}
+
+        {/* ---------------------------------------.............. */}
+        {/* <h1 className="edit-page-title">
           Detalles básicos del inmueble a editar
         </h1>
         <ToastContainer />
@@ -181,7 +286,8 @@ const InmuebleAEditar = (props) => {
           {buttonClicked ? (
             <EscenaSave inmuebleId={property.id} onSave={handleSceneAdded} />
           ) : null}
-        </div>
+        </div> */}
+        {/* ---------------------------------------.............. */}
       </div>
     </div>
   );

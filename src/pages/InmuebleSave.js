@@ -20,6 +20,14 @@ const SaveInmueble = () => {
       position: toast.POSITION.TOP_CENTER,
       hideProgressBar: false,
     });
+    toast.onChange((payload) => {
+      if (payload.status === "removed" && payload.type === toast.TYPE.SUCCESS) {
+        // navigate(location.pathname);
+        navigate("/");
+      } else {
+        return;
+      }
+    });
   };
 
   const showToastMessageError = () => {

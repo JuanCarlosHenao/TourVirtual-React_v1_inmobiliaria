@@ -14,7 +14,10 @@ const InmuebleDetalles = (props) => {
   const [properties] = useRecoilState(state);
   const location = useLocation();
   const propertyId = location.state.id;
-  const property = properties.find((val) => val.id === propertyId);
+  const [pageLoading, setPageLoading] = useState(true);
+  const [property, setProperty] = useState(null);
+
+  // const property = properties.find((val) => val.id === propertyId);
   const navigate = useNavigate();
   console.log(property);
   // console.log(location)
@@ -31,13 +34,63 @@ const InmuebleDetalles = (props) => {
     navigate("/InmuebleAEditar/", { state: { propertyId } });
   };
 
+  useEffect(() => {
+    if (properties.length === 0) {
+      navigate("/");
+    } else {
+      const property = properties.find((val) => val.id === propertyId);
+      setProperty(property);
+      setPageLoading(false);
+    }
+  }, []);
+
   return (
     <div className="App">
       <CustomMenu></CustomMenu>
       <div className="inmueble-page">
-        <div className="inmueble-container">
-          {/* <h1>Estos son los detalles del inmueble</h1> */}
+        {pageLoading ? (
+          <>Loading...</>
+        ) : (
+          <div className="inmueble-container">
+            {/* <h1>Estos son los detalles del inmueble</h1> */}
 
+            <div
+              className="inmueble-details"
+              style={{
+                order: property.escenaResponseDtoList.length === 0 ? 0 : 2,
+              }}
+            >
+              <p className="inmueble-name">{property.name.trim()}</p>
+              <p>Descripción:{property.description}</p>
+              <p className="inmueble-price">${property.price}</p>
+              <button className="inmueble-edit-btn" onClick={goToEditHandler}>
+                Editar
+              </button>
+            </div>
+            {property.escenaResponseDtoList.length === 0 ? (
+              <div>
+                <h1 className="no-scenes-text">
+                  Esta propiedad no tiene escenas para mostrar.
+                </h1>
+                <p className="add-scene-text">
+                  Diríjase a editar propiedad para agregar escenas
+                </p>
+                {buttonClicked ? <EscenaSave inmuebleId={property.id} /> : null}
+              </div>
+            ) : (
+              <div className="scene-container">
+                <b style={{ fontSize: "24px" }}>Tour virtual</b>
+                {/* <FeedbackMessage message="No hemos recibido título" /> */}
+                <EscenaSola
+                  escenaCompleta={property.escenaResponseDtoList[0]}
+                  escenas={property.escenaResponseDtoList}
+                ></EscenaSola>
+              </div>
+            )}
+          </div>
+        )}
+        {/* ----------------------------------------------------- */}
+        {/* <div className="inmueble-container">
           <div
             className="inmueble-details"
             style={{
@@ -64,14 +117,13 @@ const InmuebleDetalles = (props) => {
           ) : (
             <div className="scene-container">
               <b style={{ fontSize: "24px" }}>Tour virtual</b>
-              {/* <FeedbackMessage message="No hemos recibido título" /> */}
               <EscenaSola
                 escenaCompleta={property.escenaResponseDtoList[0]}
                 escenas={property.escenaResponseDtoList}
               ></EscenaSola>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

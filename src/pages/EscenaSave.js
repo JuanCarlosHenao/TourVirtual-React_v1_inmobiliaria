@@ -22,6 +22,14 @@ const EscenaSave = (props) => {
       hideProgressBar: false,
       // onChange: console.log("cambió"),
     });
+    toast.onChange((payload) => {
+      if (payload.status === "removed" && payload.type === toast.TYPE.SUCCESS) {
+        // navigate(location.pathname);
+        navigate("/");
+      } else {
+        return;
+      }
+    });
   };
 
   const showToastMessageError = () => {

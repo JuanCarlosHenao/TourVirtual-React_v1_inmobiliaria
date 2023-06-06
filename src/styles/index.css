@@ -174,7 +174,7 @@ body {
   border-radius: 10px;
   border: 1px solid rgb(4, 8, 63);
   height: 2rem;
-  padding: 1rem;
+  padding-left: 1rem;
   max-width: 350px;
 }
 
