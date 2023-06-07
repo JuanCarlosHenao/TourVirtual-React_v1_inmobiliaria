@@ -11,6 +11,8 @@ const HotSpotSave = (props) => {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     escena_id: props.escenaId,
+    type: "custom",
+    cssClass: "hotSpotElement",
   });
 
   const showToastMessageSuccess = () => {
@@ -134,7 +136,7 @@ const HotSpotSave = (props) => {
       {form.cssClass === "moveScene"
         ? (console.log("funciona"),
           (
-            <div>
+            <>
               <label htmlFor="nextScene">
                 Ingrese la nextScene del hotSpot{" "}
               </label>
@@ -150,7 +152,7 @@ const HotSpotSave = (props) => {
                   ))
                 )}
               </select>
-            </div>
+            </>
           ))
         : (console.log("no funciona"), (form.nextScene = ""))}
       <button className="submit-edit-btn">Confirmar</button>
